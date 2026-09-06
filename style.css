@@ -1,0 +1,445 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: rgb(246, 248, 250);
+    color: rgb(32, 41, 51);
+    line-height: 1.5;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 6%;
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(225, 230, 236);
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 3px;
+}
+
+.header p {
+    color: rgb(104, 117, 135);
+    font-size: 13px;
+}
+
+.date-box {
+    text-align: right;
+}
+
+.date-box span {
+    display: block;
+    color: rgb(137, 148, 162);
+    font-size: 11px;
+}
+
+.date-box strong {
+    font-size: 14px;
+}
+
+.container {
+    width: 88%;
+    max-width: 1100px;
+    margin: 28px auto;
+}
+
+.welcome-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 10px;
+}
+
+.welcome-section small,
+.section-heading small {
+    color: rgb(37, 99, 235);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.welcome-section h2 {
+    margin: 6px 0;
+    font-size: 25px;
+}
+
+.welcome-section p {
+    color: rgb(104, 117, 135);
+    font-size: 14px;
+}
+
+.score-box {
+    min-width: 120px;
+    padding: 18px;
+    text-align: center;
+    border-left: 1px solid rgb(225, 230, 236);
+}
+
+.score-box span {
+    display: block;
+    color: rgb(104, 117, 135);
+    font-size: 12px;
+}
+
+.score-box strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 28px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.stat-card {
+    padding: 18px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 8px;
+}
+
+.stat-card span {
+    display: block;
+    color: rgb(104, 117, 135);
+    font-size: 12px;
+}
+
+.stat-card strong {
+    display: block;
+    margin: 5px 0;
+    font-size: 22px;
+}
+
+.stat-card small {
+    color: rgb(137, 148, 162);
+    font-size: 11px;
+}
+
+.task-section,
+.tracker-section {
+    margin-top: 16px;
+    padding: 22px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 10px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.section-heading h3 {
+    margin: 3px 0;
+    font-size: 19px;
+}
+
+.section-heading p {
+    color: rgb(104, 117, 135);
+    font-size: 13px;
+}
+
+.section-heading > span {
+    color: rgb(104, 117, 135);
+    font-size: 12px;
+}
+
+.task-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.task-form input,
+.task-form select {
+    flex: 1;
+    padding: 11px 12px;
+    border: 1px solid rgb(213, 220, 229);
+    border-radius: 7px;
+    background: rgb(255, 255, 255);
+    font-size: 14px;
+    outline: none;
+}
+
+.task-form input:focus,
+.task-form select:focus {
+    border-color: rgb(37, 99, 235);
+}
+
+.task-form button,
+.health-card button {
+    padding: 11px 15px;
+    border: none;
+    border-radius: 6px;
+    background: rgb(37, 99, 235);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.task-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.task-column {
+    min-height: 180px;
+    padding: 14px;
+    background: rgb(250, 251, 252);
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 8px;
+}
+
+.column-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.column-heading h4 {
+    font-size: 14px;
+}
+
+.column-heading span {
+    color: rgb(104, 117, 135);
+    font-size: 12px;
+}
+
+.task-list {
+    min-height: 120px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px;
+    margin-bottom: 8px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 7px;
+    cursor: grab;
+}
+
+.task-item:active {
+    cursor: grabbing;
+}
+
+.task-check {
+    width: 27px;
+    height: 27px;
+    border: 1px solid rgb(203, 213, 225);
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.task-title {
+    flex: 1;
+    font-size: 14px;
+}
+
+.completed-task .task-title {
+    color: rgb(137, 148, 162);
+    text-decoration: line-through;
+}
+
+.task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.task-actions button {
+    padding: 5px 8px;
+    border: 1px solid rgb(220, 226, 233);
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    color: rgb(89, 103, 119);
+    cursor: pointer;
+}
+
+.empty-message {
+    padding: 30px 10px;
+    text-align: center;
+    color: rgb(137, 148, 162);
+    font-size: 13px;
+}
+
+.tracker-section {
+    margin-top: 16px;
+}
+
+.habit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.habit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgb(250, 251, 252);
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 7px;
+}
+
+.habit-check {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgb(203, 213, 225);
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.habit-check.completed {
+    background: rgb(22, 132, 91);
+    color: rgb(255, 255, 255);
+}
+
+.habit-info {
+    flex: 1;
+}
+
+.habit-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.habit-category {
+    display: block;
+    margin-top: 3px;
+    color: rgb(137, 148, 162);
+    font-size: 11px;
+}
+
+.habit-completed .habit-name {
+    color: rgb(137, 148, 162);
+    text-decoration: line-through;
+}
+
+.habit-delete {
+    padding: 5px 8px;
+    border: 1px solid rgb(220, 226, 233);
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    color: rgb(89, 103, 119);
+    cursor: pointer;
+}
+
+.health-trackers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.health-card {
+    padding: 18px;
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 8px;
+    background: rgb(250, 251, 252);
+}
+
+.health-card span {
+    display: block;
+    color: rgb(104, 117, 135);
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.health-card strong {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.health-card input {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 8px;
+    border: 1px solid rgb(213, 220, 229);
+    border-radius: 6px;
+    outline: none;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid rgb(37, 99, 235);
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    padding: 12px 18px;
+    background: rgb(32, 41, 51);
+    color: rgb(255, 255, 255);
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+@media (max-width: 800px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .task-columns,
+    .health-trackers {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .header,
+    .welcome-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .date-box {
+        text-align: left;
+    }
+
+    .score-box {
+        border-left: none;
+        border-top: 1px solid rgb(225, 230, 236);
+        width: 100%;
+    }
+
+    .task-form {
+        flex-direction: column;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}

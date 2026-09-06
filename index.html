@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>Fitness Tracker</h1>
+            <p>Build Healthy Habits</p>
+        </div>
+
+        <div class="date-box">
+            <span>Today</span>
+            <strong id="currentDate"></strong>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome-section">
+            <div>
+                <small>DAILY DASHBOARD</small>
+                <h2>Stay consistent. Track your progress.</h2>
+                <p>Keep track of your daily tasks and build better habits.</p>
+            </div>
+
+            <div class="score-box">
+                <span>Daily Score</span>
+                <strong id="dailyScore">0%</strong>
+            </div>
+        </section>
+
+        <section class="stats">
+            <article class="stat-card">
+                <span>Tasks</span>
+                <strong id="statTasks">0/0</strong>
+                <small id="statTasksText">No tasks yet</small>
+            </article>
+
+            <article class="stat-card">
+                <span>Habits</span>
+                <strong id="statHabits">0/0</strong>
+                <small id="statHabitsText">No habits yet</small>
+            </article>
+
+            <article class="stat-card">
+                <span>Water</span>
+                <strong id="statWater">0 ml</strong>
+                <small>Today's intake</small>
+            </article>
+
+            <article class="stat-card">
+                <span>Sleep</span>
+                <strong id="statSleep">—</strong>
+                <small>Today's sleep</small>
+            </article>
+        </section>
+
+        <section class="task-section">
+            <div class="section-heading">
+                <div>
+                    <small>PRODUCTIVITY</small>
+                    <h3>Today's Tasks</h3>
+                    <p>Add tasks and keep track of your progress.</p>
+                </div>
+
+                <span id="taskCount">0 tasks</span>
+            </div>
+
+            <form id="taskForm" class="task-form">
+                <input type="text" id="taskInput" placeholder="Add a new task..." autocomplete="off" required>
+                <button type="submit">Add Task</button>
+            </form>
+
+            <div class="task-columns">
+
+                <div class="task-column">
+                    <div class="column-heading">
+                        <h4>Pending</h4>
+                        <span id="pendingCount">0</span>
+                    </div>
+
+                    <div id="pendingTasks" class="task-list"></div>
+                </div>
+
+                <div class="task-column">
+                    <div class="column-heading">
+                        <h4>Completed</h4>
+                        <span id="completedCount">0</span>
+                    </div>
+
+                    <div id="completedTasks" class="task-list"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="tracker-section">
+            <div class="section-heading">
+                <div>
+                    <small>HEALTH</small>
+                    <h3>Daily Habits</h3>
+                    <p>Build small habits and complete them every day.</p>
+                </div>
+
+                <span id="habitCount">0 habits</span>
+            </div>
+
+            <form id="habitForm" class="task-form">
+                <input type="text" id="habitInput" placeholder="Add a new habit..." autocomplete="off" required>
+
+                <select id="habitCategory">
+                    <option value="Health">Health</option>
+                    <option value="Fitness">Fitness</option>
+                    <option value="Productivity">Productivity</option>
+                    <option value="Mindfulness">Mindfulness</option>
+                </select>
+
+                <button type="submit">Add Habit</button>
+            </form>
+
+            <div id="habitList" class="habit-list"></div>
+        </section>
+
+        <section class="tracker-section">
+            <div class="section-heading">
+                <div>
+                    <small>TRACKERS</small>
+                    <h3>Today's Health</h3>
+                    <p>Track water, sleep and calories.</p>
+                </div>
+            </div>
+
+            <div class="health-trackers">
+
+                <div class="health-card">
+                    <span>Water</span>
+                    <strong id="waterValue">0 ml</strong>
+                    <button id="waterButton" type="button">+250 ml</button>
+                </div>
+
+                <div class="health-card">
+                    <span>Sleep</span>
+                    <strong id="sleepValue">—</strong>
+                    <input type="number" id="sleepInput" placeholder="Hours" min="0" max="24" step="0.5">
+                    <button id="sleepButton" type="button">Save Sleep</button>
+                </div>
+
+                <div class="health-card">
+                    <span>Calories</span>
+                    <strong id="calorieValue">—</strong>
+                    <input type="number" id="calorieInput" placeholder="Calories" min="0">
+                    <button id="calorieButton" type="button">Save Calories</button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="tasks.js"></script>
+    <script src="habits.js"></script>
+    <script src="trackers.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
