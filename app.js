@@ -14,8 +14,7 @@ function showToast(message) {
 
 function displayCurrentDate() {
     const today = new Date();
-    const date = today.toLocaleDateString("en-IN", {
-        weekday: "long",
+    const date = today.toLocaleDateString({
         day: "numeric",
         month: "long",
         year: "numeric"
