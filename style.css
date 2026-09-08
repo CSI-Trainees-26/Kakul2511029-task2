@@ -1,33 +1,105 @@
 * {
+    margin:0;
+    padding:0;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background: rgb(246, 248, 250);
-    color: rgb(32, 41, 51);
-    line-height: 1.5;
+    background: rgb(245, 247, 250);
+    color: rgb(34, 47, 63);
 }
 
-.header {
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100vh;
+    padding: 24px 18px;
+    background: rgb(255, 255, 255);
+    border-right: 1px solid rgb(225, 230, 236);
+}
+
+.sidebar-logo h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.sidebar-logo span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: rgb(137, 148, 162);
+}
+
+.sidebar-nav {
+    margin-top: 28px;
+}
+
+.nav-item {
+    display: block;
+    padding: 10px 12px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    color: rgb(61, 75, 95);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: rgb(241, 245, 249);
+    color: rgb(32, 65, 134);
+}
+
+.nav-item.active {
+    background: rgb(239, 246, 255);
+    color: rgb(332, 65, 134);
+    font-weight: 600;
+}
+
+.sidebar-divider {
+    height: 1px;
+    margin: 24px 0;
+    background: rgb(225, 230, 236);
+}
+
+.sidebar-title {
+    padding: 0 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgb(148, 163, 184);
+}
+
+.page {
+    min-height: 100vh;
+    margin-left: 230px;
+}
+
+.topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 6%;
+    padding: 28px 40px;
     background: rgb(255, 255, 255);
     border-bottom: 1px solid rgb(225, 230, 236);
 }
 
-.header h1 {
+.topbar h1 {
+    margin: 0;
     font-size: 24px;
-    margin-bottom: 3px;
 }
 
-.header p {
-    color: rgb(104, 117, 135);
-    font-size: 13px;
+.topbar p {
+    margin: 6px 0 0;
+    color: rgb(100, 116, 139);
+    font-size: 14px;
 }
 
 .date-box {
@@ -36,157 +108,121 @@ body {
 
 .date-box span {
     display: block;
-    color: rgb(137, 148, 162);
     font-size: 11px;
+    color: rgb(148, 163, 184);
 }
 
 .date-box strong {
+    display: block;
+    margin-top: 4px;
     font-size: 14px;
 }
 
-.container {
-    width: 88%;
-    max-width: 1100px;
-    margin: 28px auto;
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 40px 60px;
 }
 
-.welcome-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 28px;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgb(225, 230, 236);
-    border-radius: 10px;
-}
-
-.welcome-section small,
-.section-heading small {
-    color: rgb(37, 99, 235);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.welcome-section h2 {
-    margin: 6px 0;
-    font-size: 25px;
-}
-
-.welcome-section p {
-    color: rgb(104, 117, 135);
-    font-size: 14px;
-}
-
-.score-box {
-    min-width: 120px;
-    padding: 18px;
-    text-align: center;
-    border-left: 1px solid rgb(225, 230, 236);
-}
-
-.score-box span {
-    display: block;
-    color: rgb(104, 117, 135);
-    font-size: 12px;
-}
-
-.score-box strong {
-    display: block;
-    margin-top: 5px;
-    font-size: 28px;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-top: 16px;
-}
-
-.stat-card {
-    padding: 18px;
+.welcome-section,
+.content-section {
+    margin-bottom: 20px;
+    padding: 24px;
     background: rgb(255, 255, 255);
     border: 1px solid rgb(225, 230, 236);
     border-radius: 8px;
-}
-
-.stat-card span {
-    display: block;
-    color: rgb(104, 117, 135);
-    font-size: 12px;
-}
-
-.stat-card strong {
-    display: block;
-    margin: 5px 0;
-    font-size: 22px;
-}
-
-.stat-card small {
-    color: rgb(137, 148, 162);
-    font-size: 11px;
-}
-
-.task-section,
-.tracker-section {
-    margin-top: 16px;
-    padding: 22px;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgb(225, 230, 236);
-    border-radius: 10px;
 }
 
 .section-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 18px;
 }
 
+.section-heading small {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgb(32, 65, 134);
+}
+
+.section-heading h2,
 .section-heading h3 {
-    margin: 3px 0;
-    font-size: 19px;
+    margin: 6px 0;
 }
 
 .section-heading p {
-    color: rgb(104, 117, 135);
+    margin: 0;
+    color: rgb(100, 116, 139);
     font-size: 13px;
 }
 
-.section-heading > span {
-    color: rgb(104, 117, 135);
-    font-size: 12px;
-}
-
-.task-form {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.task-form input,
-.task-form select {
-    flex: 1;
-    padding: 11px 12px;
-    border: 1px solid rgb(213, 220, 229);
-    border-radius: 7px;
-    background: rgb(255, 255, 255);
-    font-size: 14px;
-    outline: none;
-}
-
-.task-form input:focus,
-.task-form select:focus {
-    border-color: rgb(37, 99, 235);
-}
-
-.task-form button,
-.health-card button {
-    padding: 11px 15px;
-    border: none;
+.score-box {
+    padding: 14px 18px;
+    text-align: center;
+    border: 1px solid rgb(225, 230, 236);
     border-radius: 6px;
-    background: rgb(37, 99, 235);
+}
+
+.score-box span {
+    display: block;
+    font-size: 11px;
+    color: rgb(100, 116, 139);
+}
+
+.score-box strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 22px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.stat-card {
+    padding: 18px;
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 6px;
+}
+
+.stat-card span {
+    display: block;
+    font-size: 12px;
+    color: rgb(100, 116, 139);
+}
+
+.stat-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 22px;
+}
+
+.input-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.input-form input,
+.input-form select,
+.health-card input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgb(203, 213, 225);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.input-form button,
+.health-card button {
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 6px;
+    background: rgb(32, 65, 134);
     color: rgb(255, 255, 255);
     cursor: pointer;
 }
@@ -194,199 +230,259 @@ body {
 .task-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 16px;
+    margin-top: 20px;
 }
 
 .task-column {
-    min-height: 180px;
-    padding: 14px;
-    background: rgb(250, 251, 252);
+    min-height: 150px;
+    padding: 16px;
     border: 1px solid rgb(225, 230, 236);
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 .column-heading {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
 }
 
 .column-heading h4 {
-    font-size: 14px;
+    margin: 0;
 }
 
 .column-heading span {
-    color: rgb(104, 117, 135);
     font-size: 12px;
+    color: rgb(100, 116, 139);
 }
 
 .task-list {
-    min-height: 120px;
+    margin-top: 12px;
+    min-height: 80px;
 }
 
 .task-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    padding: 11px;
+    padding: 12px;
     margin-bottom: 8px;
-    background: rgb(255, 255, 255);
     border: 1px solid rgb(225, 230, 236);
-    border-radius: 7px;
+    border-radius: 6px;
+    background: rgb(248, 250, 252);
     cursor: grab;
 }
 
-.task-item:active {
-    cursor: grabbing;
-}
-
-.task-check {
-    width: 27px;
-    height: 27px;
-    border: 1px solid rgb(203, 213, 225);
-    border-radius: 50%;
-    background: rgb(255, 255, 255);
-    cursor: pointer;
-}
-
 .task-title {
-    flex: 1;
     font-size: 14px;
 }
 
 .completed-task .task-title {
-    color: rgb(137, 148, 162);
     text-decoration: line-through;
+    color: rgb(148, 163, 184);
 }
 
 .task-actions {
     display: flex;
-    gap: 5px;
+    gap: 6px;
 }
 
 .task-actions button {
     padding: 5px 8px;
-    border: 1px solid rgb(220, 226, 233);
-    border-radius: 5px;
+    border: 1px solid rgb(203, 213, 225);
+    border-radius: 4px;
     background: rgb(255, 255, 255);
-    color: rgb(89, 103, 119);
     cursor: pointer;
 }
 
-.empty-message {
-    padding: 30px 10px;
-    text-align: center;
-    color: rgb(137, 148, 162);
-    font-size: 13px;
-}
-
-.tracker-section {
-    margin-top: 16px;
-}
-
 .habit-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    margin-top: 20px;
 }
 
 .habit-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    padding: 12px;
-    background: rgb(250, 251, 252);
+    padding: 14px;
+    margin-bottom: 8px;
     border: 1px solid rgb(225, 230, 236);
-    border-radius: 7px;
+    border-radius: 6px;
 }
 
-.habit-check {
-    width: 28px;
-    height: 28px;
+.habit-info strong {
+    display: block;
+}
+
+.habit-info span {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: rgb(100, 116, 139);
+}
+
+.habit-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.habit-actions button {
+    padding: 7px 10px;
     border: 1px solid rgb(203, 213, 225);
-    border-radius: 50%;
-    background: rgb(255, 255, 255);
-    cursor: pointer;
-}
-
-.habit-check.completed {
-    background: rgb(22, 132, 91);
-    color: rgb(255, 255, 255);
-}
-
-.habit-info {
-    flex: 1;
-}
-
-.habit-name {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.habit-category {
-    display: block;
-    margin-top: 3px;
-    color: rgb(137, 148, 162);
-    font-size: 11px;
-}
-
-.habit-completed .habit-name {
-    color: rgb(137, 148, 162);
-    text-decoration: line-through;
-}
-
-.habit-delete {
-    padding: 5px 8px;
-    border: 1px solid rgb(220, 226, 233);
     border-radius: 5px;
     background: rgb(255, 255, 255);
-    color: rgb(89, 103, 119);
     cursor: pointer;
 }
 
-.health-trackers {
+.activity-section {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgb(225, 230, 236);
+}
+
+.habit-activity {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.activity-day {
+    text-align: center;
+}
+
+.activity-day span {
+    display: block;
+    font-size: 11px;
+    color: rgb(100, 116, 139);
+}
+
+.activity-day strong {
+    display: block;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.activity-dot {
+    width: 26px;
+    height: 26px;
+    margin: auto;
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 5px;
+    background: rgb(241, 245, 249);
+}
+
+.activity-dot.completed {
+    background: rgb(41, 69, 133);
+    border-color: rgb(41, 69, 133);
+}
+
+.health-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
+    margin-top: 20px;
 }
 
 .health-card {
     padding: 18px;
     border: 1px solid rgb(225, 230, 236);
-    border-radius: 8px;
-    background: rgb(250, 251, 252);
-}
-
-.health-card span {
-    display: block;
-    color: rgb(104, 117, 135);
-    font-size: 12px;
-    margin-bottom: 7px;
-}
-
-.health-card strong {
-    display: block;
-    font-size: 22px;
-    margin-bottom: 12px;
-}
-
-.health-card input {
-    width: 100%;
-    padding: 9px;
-    margin-bottom: 8px;
-    border: 1px solid rgb(213, 220, 229);
     border-radius: 6px;
-    outline: none;
 }
 
-.edit-input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid rgb(37, 99, 235);
-    border-radius: 5px;
-    outline: none;
-    font-size: 14px;
+.health-card > span {
+    display: block;
+    font-size: 12px;
+    color: rgb(100, 116, 139);
+}
+
+.health-card > strong {
+    display: block;
+    margin: 8px 0 14px;
+    font-size: 22px;
+}
+
+.health-card form {
+    display: flex;
+    gap: 8px;
+}
+
+.summary-box {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.summary-labels {
+    display: grid;
+    grid-template-rows: repeat(3, 24px);
+    gap: 8px;
+    padding-top: 28px;
+}
+
+.summary-labels span {
+    font-size: 11px;
+    color: rgb(100, 116, 139);
+}
+
+.weekly-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.weekly-days span {
+    text-align: center;
+    font-size: 11px;
+    color: rgb(100, 116, 139);
+}
+
+.weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(3, 24px);
+    gap: 8px;
+}
+
+.weekly-cell {
+    width: 24px;
+    height: 24px;
+    justify-self: center;
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 4px;
+    background: rgb(241, 245, 249);
+}
+
+.weekly-cell.low {
+    background: rgb(219, 234, 254);
+}
+
+.weekly-cell.medium {
+    background: rgb(104, 145, 193);
+}
+
+.weekly-cell.high {
+    background: rgb(41, 69, 133);
+}
+
+.monthly-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 24px);
+    gap: 7px;
+    margin-top: 22px;
+}
+
+.monthly-cell {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgb(225, 230, 236);
+    border-radius: 4px;
+    background: rgb(241, 245, 249);
+}
+
+.monthly-cell.active {
+    background: rgb(41, 69, 133);
 }
 
 .toast {
@@ -394,12 +490,11 @@ body {
     right: 25px;
     bottom: 25px;
     padding: 12px 18px;
-    background: rgb(32, 41, 51);
+    background: rgb(38, 48, 61);
     color: rgb(255, 255, 255);
     border-radius: 6px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
 }
 
 .toast.show {
@@ -407,39 +502,66 @@ body {
 }
 
 @media (max-width: 800px) {
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid rgb(225, 230, 236);
     }
 
-    .task-columns,
-    .health-trackers {
-        grid-template-columns: 1fr;
+    .sidebar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 18px;
+    }
+
+    .nav-item {
+        margin-bottom: 0;
+    }
+
+    .page {
+        margin-left: 0;
+    }
+
+    .stats-grid,
+    .health-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .topbar {
+        padding: 24px;
+    }
+
+    main {
+        padding: 24px;
     }
 }
 
-@media (max-width: 650px) {
-    .header,
-    .welcome-section {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .date-box {
-        text-align: left;
-    }
-
-    .score-box {
-        border-left: none;
-        border-top: 1px solid rgb(225, 230, 236);
-        width: 100%;
-    }
-
-    .task-form {
-        flex-direction: column;
-    }
-
-    .stats {
+@media (max-width: 600px) {
+    .stats-grid,
+    .health-grid,
+    .task-columns {
         grid-template-columns: 1fr;
+    }
+
+    .input-form {
+        flex-direction: column;
+    }
+
+    .summary-box {
+        grid-template-columns: 45px 1fr;
+        gap: 6px;
+    }
+
+    .weekly-days,
+    .weekly-grid {
+        gap: 4px;
+    }
+
+    .weekly-cell {
+        width: 18px;
+        height: 18px;
     }
 }

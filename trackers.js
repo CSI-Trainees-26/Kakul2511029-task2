@@ -1,11 +1,16 @@
 function getTodayKey() {
     const today = new Date();
-    return today.toISOString().split("T")[0];
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return year + "-" + month + "-" + day;
 }
 
 function getWater() {
     const savedWater = localStorage.getItem("fitness_water");
     const water = savedWater ? JSON.parse(savedWater) : {};
+
     return water[getTodayKey()] || 0;
 }
 
@@ -22,6 +27,7 @@ function addWater() {
 function getSleep() {
     const savedSleep = localStorage.getItem("fitness_sleep");
     const sleep = savedSleep ? JSON.parse(savedSleep) : {};
+
     return sleep[getTodayKey()] || "";
 }
 
@@ -37,6 +43,7 @@ function saveSleep(hours) {
 function getCalories() {
     const savedCalories = localStorage.getItem("fitness_calories");
     const calories = savedCalories ? JSON.parse(savedCalories) : {};
+
     return calories[getTodayKey()] || "";
 }
 

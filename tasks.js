@@ -55,7 +55,9 @@ function moveTask(id, status) {
     const task = tasks.find(function(task) {
         return task.id === id;
     });
+
     if (!task) return;
+
     task.status = status;
     saveTasks();
 }
