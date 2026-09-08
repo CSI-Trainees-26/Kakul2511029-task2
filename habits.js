@@ -16,7 +16,6 @@ function addHabit(name, category) {
         category: category,
         completedDates: []
     };
-
     habits.push(habit);
     saveHabits();
 }
@@ -25,7 +24,6 @@ function deleteHabit(id) {
     habits = habits.filter(function(habit) {
         return habit.id !== id;
     });
-
     saveHabits();
 }
 

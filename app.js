@@ -15,7 +15,7 @@ function displayCurrentDate() {
     const today = new Date();
 
     const date = today.toLocaleDateString("en-IN", {
-        weekday: "long",
+        weekday: "short",
         day: "numeric",
         month: "long",
         year: "numeric"
@@ -46,14 +46,11 @@ function renderTasks() {
 
 function createTaskElement(task) {
     const item = document.createElement("div");
-
     item.className = "task-item";
     item.draggable = true;
-
     if (task.status === "completed") {
         item.classList.add("completed-task");
     }
-
     const title = document.createElement("span");
     title.className = "task-title";
     title.textContent = task.title;
@@ -61,8 +58,7 @@ function createTaskElement(task) {
     actions.className = "task-actions";
     const toggleButton = document.createElement("button");
 
-    toggleButton.textContent =
-        task.status === "pending" ? "Done" : "Undo";
+    toggleButton.textContent = task.status === "pending" ? "Done" : "Undo";
 
     toggleButton.addEventListener("click", function() {
         toggleTaskStatus(task.id);
@@ -122,9 +118,7 @@ function renderHabits() {
         const todayButton = document.createElement("button");
         const today = getTodayKey();
         todayButton.textContent =
-            habit.completedDates.includes(today)
-                ? "Completed"
-                : "Complete";
+            habit.completedDates.includes(today) ? "Completed" : "Complete";
         todayButton.addEventListener("click", function() {
             toggleHabit(habit.id, today);
             renderHabits();
@@ -174,7 +168,7 @@ function renderHabitActivity() {
         number.textContent = date.getDate();
         const dot = document.createElement("div");
         dot.className = "activity-dot";
-        let completed = false;c
+        let completed = false;
         habits.forEach(function(habit) {
             if (habit.completedDates.includes(dateKey)) {
                 completed = true;
@@ -188,7 +182,6 @@ function renderHabitActivity() {
         item.appendChild(name);
         item.appendChild(number);
         item.appendChild(dot);
-
         container.appendChild(item);
     }
 }
@@ -197,34 +190,26 @@ function updateStatistics() {
     const completedTasks = tasks.filter(function(task) {
         return task.status === "completed";
     }).length;
-
     const completedHabits = habits.filter(function(habit) {
         return habit.completedDates.includes(getTodayKey());
     }).length;
-
     $("taskCount").textContent = tasks.length;
     $("habitCount").textContent = habits.length;
     $("waterCount").textContent = getWater() + " ml";
     $("sleepCount").textContent = (getSleep() || 0) + " hrs";
-
     let score = 0;
-
     if (tasks.length > 0) {
         score += (completedTasks / tasks.length) * 40;
     }
-
     if (habits.length > 0) {
         score += (completedHabits / habits.length) * 40;
     }
-
     if (getWater() > 0) {
         score += 10;
     }
-
     if (getSleep() > 0) {
         score += 10;
     }
-
     $("dailyScore").textContent = Math.round(score) + "%";
 }
 
@@ -246,17 +231,11 @@ function setupDragAndDrop() {
         container.addEventListener("drop", function(event) {
             event.preventDefault();
 
-            const id = Number(
-                event.dataTransfer.getData("text/plain")
+            const id = Number( event.dataTransfer.getData("text/plain")
             );
 
-            const status =
-                container === pending
-                    ? "pending"
-                    : "completed";
-
+            const status = container === pending  ? "pending" : "completed";
             moveTask(id, status);
-
             renderTasks();
             updateStatistics();
             renderWeeklySummary();
@@ -269,48 +248,36 @@ function getDateKey(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-
     return year + "-" + month + "-" + day;
 }
 
 function renderWeeklySummary() {
     const daysContainer = $("weeklyDays");
     const gridContainer = $("weeklyGrid");
-
     daysContainer.innerHTML = "";
     gridContainer.innerHTML = "";
 
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
-
         date.setDate(date.getDate() - i);
-
         const day = document.createElement("span");
-
         day.textContent = date.toLocaleDateString("en-IN", {
             weekday: "short"
         });
-
         daysContainer.appendChild(day);
     }
 
     for (let row = 0; row < 3; row++) {
         for (let i = 6; i >= 0; i--) {
             const date = new Date();
-
             date.setDate(date.getDate() - i);
-
             const dateKey = getDateKey(date);
-
             const cell = document.createElement("div");
-
             cell.className = "weekly-cell";
-
             if (row === 0) {
                 const completed = tasks.some(function(task) {
                     return task.status === "completed";
                 });
-
                 if (completed) {
                     cell.classList.add("medium");
                 }
@@ -328,12 +295,8 @@ function renderWeeklySummary() {
 
             if (row === 2) {
                 const savedWater = localStorage.getItem("fitness_water");
-                const waterData = savedWater
-                    ? JSON.parse(savedWater)
-                    : {};
-
+                const waterData = savedWater ? JSON.parse(savedWater) : {};
                 const water = waterData[dateKey] || 0;
-
                 if (water >= 500) {
                     cell.classList.add("high");
                 } else if (water > 0) {
@@ -342,7 +305,6 @@ function renderWeeklySummary() {
                     cell.classList.add("low");
                 }
             }
-
             gridContainer.appendChild(cell);
         }
     }
@@ -358,19 +320,10 @@ function renderMonthlySummary() {
     const year = today.getFullYear();
     const month = today.getMonth();
 
-    const daysInMonth = new Date(
-        year,
-        month + 1,
-        0
-    ).getDate();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     for (let dayNumber = 1; dayNumber <= daysInMonth; dayNumber++) {
-        const date = new Date(
-            year,
-            month,
-            dayNumber
-        );
-
+        const date = new Date(year, month,dayNumber);
         const dateKey = getDateKey(date);
 
         const cell = document.createElement("div");
@@ -382,112 +335,80 @@ function renderMonthlySummary() {
         });
 
         const savedWater = localStorage.getItem("fitness_water");
-        const waterData = savedWater
-            ? JSON.parse(savedWater)
-            : {};
-
+        const waterData = savedWater ? JSON.parse(savedWater): {};
         const activeWater = waterData[dateKey] > 0;
-
         if (activeHabit || activeWater) {
             cell.classList.add("active");
         }
-
         container.appendChild(cell);
     }
 }
 
 $("taskForm").addEventListener("submit", function(event) {
     event.preventDefault();
-
     const input = $("taskInput");
     const title = input.value.trim();
-
-    if (title === "") return;
-
+    if (title === "") {
+        return;
+    }
     addTask(title);
-
     input.value = "";
-
     renderTasks();
     updateStatistics();
     renderWeeklySummary();
     renderMonthlySummary();
-
     showToast("Task added.");
 });
 
 $("habitForm").addEventListener("submit", function(event) {
     event.preventDefault();
-
     const input = $("habitInput");
     const category = $("habitCategory");
-
     const name = input.value.trim();
-
     if (name === "") return;
-
     addHabit(name, category.value);
-
     input.value = "";
-
     renderHabits();
     renderHabitActivity();
     updateStatistics();
     renderWeeklySummary();
     renderMonthlySummary();
-
     showToast("Habit added.");
 });
 
 $("waterButton").addEventListener("click", function() {
     addWater();
-
     updateHealthTrackers();
     updateStatistics();
     renderWeeklySummary();
     renderMonthlySummary();
-
     showToast("250 ml added.");
 });
 
 $("sleepForm").addEventListener("submit", function(event) {
     event.preventDefault();
-
     const value = $("sleepInput").value;
-
     if (value === "") return;
-
     saveSleep(value);
-
     $("sleepInput").value = "";
-
     updateHealthTrackers();
     updateStatistics();
-
     showToast("Sleep saved.");
 });
 
 $("calorieForm").addEventListener("submit", function(event) {
     event.preventDefault();
-
     const value = $("calorieInput").value;
-
     if (value === "") return;
-
     saveCalories(value);
-
     $("calorieInput").value = "";
-
     updateHealthTrackers();
-
     showToast("Calories saved.");
 });
 
 displayCurrentDate();
-
 loadTasks();
 loadHabits();
-
 renderTasks();
 renderHabits();
 renderHabitActivity();

@@ -16,7 +16,6 @@ function addTask(title) {
         status: "pending",
         pomodoros: 0
     };
-
     tasks.push(task);
     saveTasks();
 }
@@ -25,7 +24,6 @@ function deleteTask(id) {
     tasks = tasks.filter(function(task) {
         return task.id !== id;
     });
-
     saveTasks();
 }
 
@@ -33,9 +31,7 @@ function editTask(id, newTitle) {
     const task = tasks.find(function(task) {
         return task.id === id;
     });
-
     if (!task) return;
-
     task.title = newTitle;
     saveTasks();
 }
@@ -44,9 +40,7 @@ function toggleTaskStatus(id) {
     const task = tasks.find(function(task) {
         return task.id === id;
     });
-
     if (!task) return;
-
     task.status = task.status === "pending" ? "completed" : "pending";
     saveTasks();
 }
@@ -55,9 +49,7 @@ function moveTask(id, status) {
     const task = tasks.find(function(task) {
         return task.id === id;
     });
-
     if (!task) return;
-
     task.status = status;
     saveTasks();
 }
