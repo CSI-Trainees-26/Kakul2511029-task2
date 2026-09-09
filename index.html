@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,272 +7,284 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <aside class="sidebar">
-        <div class="sidebar-logo">
-            <h2>Fitness Tracker</h2>
-            <span>Build Healthy Habits</span>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="#dashboard" class="nav-item active">Dashboard</a>
-            <a href="#quotes" class="nav-item">Quotes</a>
-            <a href="#tasks" class="nav-item">Tasks</a>
-            <a href="#habits" class="nav-item">Habits</a>
-            <a href="#health" class="nav-item">Health</a>
-            <a href="#pomodoro" class="nav-item">Pomodoro</a>
-        </nav>
 
-        <div class="sidebar-divider"></div>
-        <div class="sidebar-title">PROGRESS</div>
-        <nav class="sidebar-nav">
-            <a href="#weekly" class="nav-item">Weekly Summary</a>
-            <a href="#monthly" class="nav-item">Monthly Summary</a>
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>FitTrack</h2>
+            <p>Fitness & Habit Tracker</p>
+        </div>
+        <nav>
+            <button class="nav-button active" data-section="dashboard">Dashboard</button>
+            <button class="nav-button" data-section="quotes">Quotes</button>
+            <button class="nav-button" data-section="tasks">Tasks</button>
+            <button class="nav-button" data-section="habits">Habits</button>
+            <button class="nav-button" data-section="health">Health</button>
+            <button class="nav-button" data-section="pomodoro">Pomodoro</button>
+            <button class="nav-button" data-section="weekly">Weekly Summary</button>
+            <button class="nav-button" data-section="monthly">Monthly Summary</button>
         </nav>
     </aside>
 
-    <div class="page">
+    <main class="main-content">
         <header class="topbar">
             <div>
-                <h1>Fitness Tracker</h1>
-                <p>Build Healthy Habits</p>
+                <small>TODAY</small>
+                <h1 id="currentDate"></h1>
             </div>
-            <div class="date-box">
-                <span>Today</span>
-                <strong id="currentDate"></strong>
-            </div>
+            <div class="topbar-title">FITNESS TRACKER</div>
         </header>
-
-        <main>
-            <section id="dashboard" class="welcome-section">
-                <div class="section-heading">
-                    <div>
-                        <small>DASHBOARD</small>
-                        <h2>Daily Overview</h2>
-                        <p>Keep track of your tasks, habits and health.</p>
-                    </div>
-
-                    <div class="score-box">
-                        <span>Daily Score</span>
-                        <strong id="dailyScore">0%</strong>
-                    </div>
+        <section id="dashboard" class="content-section active-section">
+            <div class="welcome-section">
+                <div>
+                    <small>WELCOME BACK</small>
+                    <h2>Build better habits every day.</h2>
+                    <p>Keep track of your tasks, habits and daily health.</p>
                 </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span>Tasks</span>
-                        <strong id="taskCount">0</strong>
-                    </div>
-
-                    <div class="stat-card">
-                        <span>Habits</span>
-                        <strong id="habitCount">0</strong>
-                    </div>
-
-                    <div class="stat-card">
-                        <span>Water</span>
-                        <strong id="waterCount">0 ml</strong>
-                    </div>
-
-                    <div class="stat-card">
-                        <span>Sleep</span>
-                        <strong id="sleepCount">0 hrs</strong>
-                    </div>
+                <div class="score-box">
+                    <strong id="dailyScore">0%</strong>
+                    <span>DAILY SCORE</span>
                 </div>
-            </section>
-             <section id="quotes" class="content-section">
-              <div class="section-heading">
-                  <div>
-                   <small>MOTIVATION</small>
-                   <h3>Daily Quote</h3>
-                   <p>Get a motivational quote to keep moving forward.</p>
-                  </div>
-             </div>
-             <div class="quote-box">
-                <p id="quoteText">Click the button to get a quote.</p>
-                <span id="quoteAuthor"></span>
-                    <div class="quote-actions">
-                       <button id="newQuoteButton" type="button">New Quote</button>
-                       <button id="saveQuoteButton" type="button">Save Quote</button>
-                    </div>
-             </div>
-             <div class="saved-quotes">
-                 <h4>Saved Quotes</h4>
-                <div id="savedQuotesList"></div>
             </div>
-            </section>
-
-            <section id="tasks" class="content-section">
-                <div class="section-heading">
-                    <div>
-                        <small>TASKS</small>
-                        <h3>Today's Tasks</h3>
-                        <p>Add tasks and move them between pending and completed.</p>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <small>TASKS</small>
+                    <strong id="statTasks">0/0</strong>
+                    <span id="statTasksText">No tasks yet</span>
                 </div>
-
-                <form id="taskForm" class="input-form">
-                    <input type="text" id="taskInput" placeholder="Enter a task" required>
-                    <button type="submit">Add Task</button>
-                </form>
-
-                <div class="task-columns">
-                    <div class="task-column">
-                        <div class="column-heading">
-                            <h4>Pending</h4>
-                            <span id="pendingCount">0</span>
-                        </div>
-                        <div id="pendingTasks" class="task-list"></div>
-                    </div>
-
-                    <div class="task-column">
-                        <div class="column-heading">
-                            <h4>Completed</h4>
-                            <span id="completedCount">0</span>
-                        </div>
-                        <div id="completedTasks" class="task-list"></div>
-                    </div>
+                <div class="stat-card">
+                    <small>HABITS</small>
+                    <strong id="statHabits">0/0</strong>
+                    <span id="statHabitsText">No habits yet</span>
                 </div>
-            </section>
-
-            <section id="habits" class="content-section">
-                <div class="section-heading">
-                    <div>
-                        <small>HABITS</small>
-                        <h3>Daily Habits</h3>
-                        <p>Create habits and mark them complete each day.</p>
-                    </div>
+                <div class="stat-card">
+                    <small>WATER</small>
+                    <strong id="statWater">0 ml</strong>
+                    <span>Today's intake</span>
                 </div>
-
-                <form id="habitForm" class="input-form">
-                    <input type="text" id="habitInput" placeholder="Enter a habit" required >
-                    <button type="submit">Add Habit</button>
-                </form>
-
-             <div id="habitList" class="habit-list"></div>
-                <div class="activity-section">
+                <div class="stat-card">
+                    <small>SLEEP</small>
+                    <strong id="statSleep">—</strong>
+                    <span>Last saved value</span>
+                </div>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
                     <div class="section-heading">
                         <div>
-                            <small>ACTIVITY</small>
-                            <h3>Habit Activity</h3>
-                            <p>Your activity during the last seven days.</p>
+                            <small>TASKS</small>
+                            <h3>Today's Tasks</h3>
                         </div>
+                        <span id="taskCount">0 tasks</span>
                     </div>
+                    <div class="mini-task-list" id="dashboardTasks"></div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="section-heading">
+                        <div>
+                            <small>HABITS</small>
+                            <h3>Today's Habits</h3>
+                        </div>
+                        <span id="habitCount">0 habits</span>
+                    </div>
+                    <div class="mini-habit-list" id="dashboardHabits"></div>
+                </div>
+            </div>
+        </section>
 
+        <section id="quotes" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>MOTIVATION</small>
+                    <h2>Motivational Quotes</h2>
+                    <p>Take a moment and get some motivation.</p>
+                </div>
+            </div>
+            <div class="quote-box">
+                <p id="quoteText">Click the button to get a quote.</p>
+                <span id="quoteAuthor"></span>
+                <div class="quote-actions">
+                    <button id="newQuoteButton" type="button">New Quote</button>
+                    <button id="saveQuoteButton" type="button">Save Quote</button>
+                </div>
+            </div>
+            <div class="saved-quotes">
+                <div class="section-heading">
+                    <div>
+                        <small>SAVED</small>
+                        <h3>Saved Quotes</h3>
+                    </div>
+                </div>
+                <div id="savedQuotesList"></div>
+            </div>
+        </section>
+        <section id="tasks" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>PRODUCTIVITY</small>
+                    <h2>Task Manager</h2>
+                    <p>Add, complete, edit and delete your tasks.</p>
+                </div>
+            </div>
+            <form id="taskForm" class="input-form">
+                <input id="taskInput" type="text" placeholder="Enter a task">
+                <button type="submit">Add Task</button>
+            </form>
+            <div class="task-columns">
+                <div class="task-column">
+                    <div class="column-heading">
+                        <h3>Pending</h3>
+                        <span id="pendingCount">0</span>
+                    </div>
+                    <div id="pendingTasks" class="task-list"></div>
+                </div>
+                <div class="task-column">
+                    <div class="column-heading">
+                        <h3>Completed</h3>
+                        <span id="completedCount">0</span>
+                    </div>
+                    <div id="completedTasks" class="task-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="habits" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>CONSISTENCY</small>
+                    <h2>Habit Tracker</h2>
+                    <p>Build habits and mark them complete every day.</p>
+                </div>
+            </div>
+            <form id="habitForm" class="input-form">
+                <input id="habitInput" type="text" placeholder="Enter a habit">
+                <button type="submit">Add Habit</button>
+            </form>
+            <div class="habit-layout">
+                <div class="habit-column">
+                    <div class="column-heading">
+                        <h3>Your Habits</h3>
+                    </div>
+                    <div id="habitList" class="habit-list"></div>
+                </div>
+                <div class="habit-column">
+                    <div class="column-heading">
+                        <h3>Activity</h3>
+                    </div>
                     <div id="habitActivity" class="habit-activity"></div>
                 </div>
+            </div>
+        </section>
 
-            </section>
-
-            <section id="health" class="content-section">
-                <div class="section-heading">
-                    <div>
-                        <small>HEALTH</small>
-                        <h3>Health Trackers</h3>
-                        <p>Track your daily water, sleep and calories.</p>
+        <section id="health" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>HEALTH</small>
+                    <h2>Health Trackers</h2>
+                    <p>Keep your basic daily health information in one place.</p>
+                </div>
+            </div>
+            <div class="health-grid">
+                <div class="health-card">
+                    <small>WATER</small>
+                    <strong id="waterValue">0 ml</strong>
+                    <p>Add 250 ml of water.</p>
+                    <button id="waterButton" type="button">+250 ml</button>
+                </div>
+                <div class="health-card">
+                    <small>SLEEP</small>
+                    <strong id="sleepValue">—</strong>
+                    <div class="health-input">
+                        <input id="sleepInput" type="number" min="0" step="0.5" placeholder="Hours">
+                        <button id="sleepButton" type="button">Save</button>
                     </div>
                 </div>
-                <div class="health-grid">
-
-                    <div class="health-card">
-                        <span>Water</span>
-                        <strong id="waterAmount">0 ml</strong>
-                        <button id="waterButton" type="button">+250 ml</button>
-                    </div>
-
-                    <div class="health-card">
-                        <span>Sleep</span>
-                        <strong id="sleepAmount">0 hrs</strong>
-
-                        <form id="sleepForm">
-                            <input type="number" id="sleepInput" placeholder="Hours" min="0" step="0.5">
-                            <button type="submit">Save</button>
-                        </form>
-                    </div>
-
-                    <div class="health-card">
-                        <span>Calories</span>
-                        <strong id="calorieAmount">0 kcal</strong>
-
-                        <form id="calorieForm">
-                            <input type="number" id="calorieInput" placeholder="Calories" min="0">
-                            <button type="submit">Save</button>
-                        </form>
+                <div class="health-card">
+                    <small>CALORIES</small>
+                    <strong id="calorieValue">—</strong>
+                    <div class="health-input">
+                        <input id="calorieInput" type="number" min="0" placeholder="Calories">
+                        <button id="calorieButton" type="button">Save</button>
                     </div>
                 </div>
-            </section>
-            <section id="pomodoro" class="content-section">
-                 <div class="section-heading">
-                    <div>
-                        <small>FOCUS</small>
-                        <h3>Pomodoro Timer</h3>
-                        <p>Focus on one task at a time.</p>
-                    </div>
-                   </div>
-                <div class="pomodoro-box">
-                    <select id="pomodoroTaskSelect">
-                         <option value="">Select a task</option>
-                    </select>
-                    <div id="timerDisplay">25:00</div>
-                         <p id="timerStatus">Ready to focus</p>
-                             <div class="pomodoro-actions">
-                                <button id="startTimerButton" type="button">Start</button>
-                                 <button id="pauseTimerButton" type="button">Pause</button>
-                                    <button id="resetTimerButton" type="button">Reset</button>
-                            </div>
-                        </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="weekly" class="content-section">
-                <div class="section-heading">
-                    <div>
-                        <small>PROGRESS</small>
-                        <h3>Weekly Summary</h3>
-                        <p>Your activity over the last seven days.</p>
-                    </div>
+        <section id="pomodoro" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>FOCUS</small>
+                    <h2>Pomodoro Timer</h2>
+                    <p>Focus on one task at a time.</p>
                 </div>
-
-                <div class="summary-box">
-                    <div class="summary-labels">
-                        <span>Tasks</span>
-                        <span>Habits</span>
-                        <span>Water</span>
-                    </div>
-
-                    <div class="summary-content">
-                        <div id="weeklyDays" class="weekly-days"></div>
-                        <div id="weeklyGrid" class="weekly-grid"></div>
-                    </div>
+            </div>
+            <div class="pomodoro-box">
+                <select id="pomodoroTaskSelect">
+                    <option value="">Select a task</option>
+                </select>
+                <div id="timerDisplay">25:00</div>
+                <p id="timerStatus">Ready to focus</p>
+                <div class="pomodoro-actions">
+                    <button id="startTimerButton" type="button">Start</button>
+                    <button id="pauseTimerButton" type="button">Pause</button>
+                    <button id="resetTimerButton" type="button">Reset</button>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="monthly" class="content-section">
-                <div class="section-heading">
-                    <div>
-                        <small>PROGRESS</small>
-                        <h3>Monthly Summary</h3>
-                        <p>Your activity throughout the month.</p>
-                    </div>
+        <section id="weekly" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>PROGRESS</small>
+                    <h2>Weekly Summary</h2>
+                    <p>Your activity over the last seven days.</p>
                 </div>
-                <div class="monthly-weekdays">
-                  <span>Sun</span>
-                   <span>Mon</span>
-                   <span>Tue</span>
-                   <span>Wed</span>
-                   <span>Thu</span>
-                   <span>Fri</span>
-                  <span>Sat</span>
+            </div>
+            <div class="summary-box">
+                <div class="summary-title">
+                    <span>Last 7 Days</span>
                 </div>
-            <div id="monthlyGrid" class="monthly-grid"></div>
-            </section>
-        </main>
+                <div id="weeklyDays" class="weekly-days"></div>
+                <div class="summary-label">
+                    <span>Habits</span>
+                </div>
+                <div id="weeklyGrid" class="weekly-grid"></div>
+            </div>
+        </section>
 
-        <div id="toast" class="toast"></div>
-    </div>
-     
-    <script src="quotes.js"></script>
+        <section id="monthly" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <small>PROGRESS</small>
+                    <h2>Monthly Summary</h2>
+                    <p>Your habit activity for this month.</p>
+                </div>
+            </div>
+            <div class="summary-box">
+                <div class="summary-title">
+                    <span id="monthlyTitle">This Month</span>
+                </div>
+                <div class="month-weekdays">
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                </div>
+                <div id="monthlyGrid" class="monthly-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
     <script src="tasks.js"></script>
     <script src="habits.js"></script>
     <script src="trackers.js"></script>
+    <script src="quotes.js"></script>
     <script src="pomodoro.js"></script>
     <script src="app.js"></script>
+
 </body>
 </html>

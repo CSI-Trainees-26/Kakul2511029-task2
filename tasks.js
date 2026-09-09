@@ -41,7 +41,11 @@ function toggleTaskStatus(id) {
         return task.id === id;
     });
     if (!task) return;
-    task.status = task.status === "pending" ? "completed" : "pending";
+    if (task.status === "pending") {
+        task.status = "completed";
+    } else {
+        task.status = "pending";
+    }
     saveTasks();
 }
 

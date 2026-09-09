@@ -13,14 +13,12 @@ function showToast(message) {
 
 function displayCurrentDate() {
     const today = new Date();
-
-    const date = today.toLocaleDateString("en-IN", {
+    $("currentDate").textContent = today.toLocaleDateString("en-IN", {
         weekday: "short",
         day: "numeric",
         month: "long",
         year: "numeric"
     });
-    $("currentDate").textContent = date;
 }
 
 function renderTasks() {
@@ -28,227 +26,307 @@ function renderTasks() {
     const completedContainer = $("completedTasks");
     pendingContainer.innerHTML = "";
     completedContainer.innerHTML = "";
-    const pendingTasks = tasks.filter(function(task) {
-        return task.status === "pending";
-    });
-    const completedTasks = tasks.filter(function(task) {
-        return task.status === "completed";
-    });
-    pendingTasks.forEach(function(task) {
-        pendingContainer.appendChild(createTaskElement(task));
-    });
-    completedTasks.forEach(function(task) {
-        completedContainer.appendChild(createTaskElement(task));
-    });
-    $("pendingCount").textContent = pendingTasks.length;
-    $("completedCount").textContent = completedTasks.length;
-}
-
-function createTaskElement(task) {
-    const item = document.createElement("div");
-    item.className = "task-item";
-    item.draggable = true;
-    if (task.status === "completed") {
-        item.classList.add("completed-task");
-    }
-    const title = document.createElement("span");
-    title.className = "task-title";
-    title.textContent = task.title;
-    const actions = document.createElement("div");
-    actions.className = "task-actions";
-    const toggleButton = document.createElement("button");
-
-    toggleButton.textContent = task.status === "pending" ? "Done" : "Undo";
-
-    toggleButton.addEventListener("click", function() {
-        toggleTaskStatus(task.id);
-        renderTasks();
-        updateStatistics();
-        showToast("Task updated.");
-    });
-
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.addEventListener("click", function() {
-        const newTitle = prompt("Edit task", task.title);
-        if (newTitle && newTitle.trim() !== "") {
-            editTask(task.id, newTitle.trim());
-            renderTasks();
-            showToast("Task updated.");
+    tasks.forEach(function(task) {
+        const item = document.createElement("div");
+        item.className = "task-item";
+        item.draggable = true;
+        item.addEventListener("dragstart", function(event) {
+            event.dataTransfer.setData("text/plain", task.id);
+        });
+        const checkButton = document.createElement("button");
+        checkButton.className = "task-check";
+        checkButton.type = "button";
+        checkButton.textContent = task.status === "completed" ? "✓" : "";
+        checkButton.addEventListener("click", function() {
+            const wasCompleted = task.status === "completed";
+            toggleTaskStatus(task.id);
+            renderAll();
+            showToast(wasCompleted ? "Task moved to pending."  : "Task completed!");
+        });
+        const title = document.createElement("span");
+        title.className = "task-title";
+        title.textContent = task.title;
+        const actions = document.createElement("div");
+        actions.className = "task-actions";
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.textContent = "Edit";
+        editButton.addEventListener("click", function() {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = task.title;
+            input.className = "edit-input";
+            title.replaceWith(input);
+            editButton.textContent = "Save";
+            input.focus();
+            editButton.onclick = function() {
+                const newTitle = input.value.trim();
+                if (!newTitle) {
+                    showToast("Task cannot be empty.");
+                    return;
+                }
+                editTask(task.id, newTitle);
+                renderAll();
+                showToast("Task updated.");
+            };
+        });
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+        deleteButton.addEventListener("click", function() {
+            deleteTask(task.id);
+            renderAll();
+            showToast("Task deleted.");
+        });
+        actions.appendChild(editButton);
+        actions.appendChild(deleteButton);
+        item.appendChild(checkButton);
+        item.appendChild(title);
+        item.appendChild(actions);
+        if (task.status === "completed") {
+            item.classList.add("completed-task");
+            completedContainer.appendChild(item);
+        }
+         else {
+            pendingContainer.appendChild(item);
         }
     });
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", function() {
-        deleteTask(task.id);
-        renderTasks();
-        updateStatistics();
-        showToast("Task deleted.");
-    });
-
-    actions.appendChild(toggleButton);
-    actions.appendChild(editButton);
-    actions.appendChild(deleteButton);
-    item.appendChild(title);
-    item.appendChild(actions);
-    item.addEventListener("dragstart", function(event) {
-        event.dataTransfer.setData("text/plain", task.id);
-    });
-    return item;
+    const pending = tasks.filter(function(task) {
+        return task.status === "pending"; }).length;
+    const completed = tasks.filter(function(task) {
+        return task.status === "completed";
+    }).length;
+    $("pendingCount").textContent = pending;
+    $("completedCount").textContent = completed;
+    $("taskCount").textContent = tasks.length + (tasks.length === 1 ? " task" : " tasks");
+    if (pending === 0) {pendingContainer.innerHTML = '<div class="empty-message">No pending tasks.</div>'; }
+    if (completed === 0) {completedContainer.innerHTML = '<div class="empty-message">No completed tasks.</div>';}
+    renderDashboardTasks();
 }
 
 function renderHabits() {
     const container = $("habitList");
     container.innerHTML = "";
-
+    const today = getTodayKey();
     habits.forEach(function(habit) {
         const item = document.createElement("div");
         item.className = "habit-item";
+        const completed = habit.completedDates.includes(today);
+        if (completed) {
+            item.classList.add("habit-completed");
+        }
+        const checkButton = document.createElement("button");
+        checkButton.type = "button";
+        checkButton.className = "habit-check";
+        checkButton.textContent = completed ? "✓" : "";
+        if (completed) {checkButton.classList.add("completed")}
+        checkButton.addEventListener("click", function() {
+            toggleHabit(habit.id, today);
+            renderAll();
+            showToast( completed ? "Habit marked pending." : "Habit completed!");
+        });
         const info = document.createElement("div");
         info.className = "habit-info";
-        const name = document.createElement("strong");
+        const name = document.createElement("span");
+        name.className = "habit-name";
         name.textContent = habit.name;
-        const category = document.createElement("span");
-        category.textContent = habit.category;
         info.appendChild(name);
-        info.appendChild(category);
         const actions = document.createElement("div");
         actions.className = "habit-actions";
-        const todayButton = document.createElement("button");
-        const today = getTodayKey();
-        todayButton.textContent =
-            habit.completedDates.includes(today) ? "Completed" : "Complete";
-        todayButton.addEventListener("click", function() {
-            toggleHabit(habit.id, today);
-            renderHabits();
-            renderHabitActivity();
-            updateStatistics();
-            renderWeeklySummary();
-            renderMonthlySummary();
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.textContent = "Edit";
+        editButton.addEventListener("click", function() {
+            const newName = prompt("Edit habit", habit.name);
+            if (!newName || !newName.trim()) {
+                return;
+            }
+            editHabit(habit.id, newName.trim());
+            renderAll();
+            showToast("Habit updated.");
         });
+
         const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
         deleteButton.textContent = "Delete";
         deleteButton.addEventListener("click", function() {
             deleteHabit(habit.id);
-            renderHabits();
-            renderHabitActivity();
-            updateStatistics();
-            renderWeeklySummary();
-            renderMonthlySummary();
+            renderAll();
             showToast("Habit deleted.");
         });
-
-        actions.appendChild(todayButton);
+        actions.appendChild(editButton);
         actions.appendChild(deleteButton);
+        item.appendChild(checkButton);
         item.appendChild(info);
         item.appendChild(actions);
         container.appendChild(item);
     });
+
+    $("habitCount").textContent = habits.length + (habits.length === 1 ? " habit" : " habits");
+
+    if (habits.length === 0) { container.innerHTML = '<div class="empty-message">No habits yet.</div>' };
+    renderDashboardHabits();
+}
+
+function updateStatistics() {
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(function(task) {
+        return task.status === "completed";
+    }).length;
+    $("statTasks").textContent = completedTasks + "/" + totalTasks;
+
+    if (totalTasks === 0) {
+        $("statTasksText").textContent = "No tasks yet";
+    } 
+    else if (completedTasks === totalTasks) {
+        $("statTasksText").textContent = "All tasks completed";
+    }
+     else {
+        $("statTasksText").textContent =
+            totalTasks - completedTasks + " remaining";
+    }
+    const totalHabits = habits.length;
+    const completedHabits = habits.filter(function(habit) {
+        return habit.completedDates.includes(getTodayKey());
+    }).length;
+
+    $("statHabits").textContent =completedHabits + "/" + totalHabits;
+
+    if (totalHabits === 0) {
+        $("statHabitsText").textContent = "No habits yet";
+    }
+     else {
+        $("statHabitsText").textContent =
+            completedHabits + " completed today";
+    }
+    $("statWater").textContent = getWater() + " ml";
+    const sleep = getSleep();
+    $("statSleep").textContent = sleep ? sleep + "h" : "—";
+    let taskScore = 0;
+    let habitScore = 0;
+    if (totalTasks > 0) {
+        taskScore = completedTasks / totalTasks;
+    }
+
+    if (totalHabits > 0) {
+        habitScore = completedHabits / totalHabits;
+    }
+
+    let score = 0;
+    if (totalTasks > 0 && totalHabits > 0) {
+        score = ((taskScore + habitScore) / 2) * 100;
+    } 
+    else if (totalTasks > 0) {
+        score = taskScore * 100;
+    } 
+    else if (totalHabits > 0) {
+        score = habitScore * 100;
+    }
+
+    $("dailyScore").textContent =
+        Math.round(score) + "%";
+}
+
+function renderDashboardTasks() {
+    const container = $("dashboardTasks");
+    container.innerHTML = "";
+    const recentTasks = tasks.slice(0, 4);
+    if (recentTasks.length === 0) {
+        container.innerHTML =
+            '<div class="empty-message">No tasks yet.</div>';
+        return;
+    }
+
+    recentTasks.forEach(function(task) {
+        const item = document.createElement("div");
+        item.className = "mini-task";
+        item.textContent = task.status === "completed" ? "✓ " + task.title : task.title;
+        container.appendChild(item);
+    });
+}
+
+function renderDashboardHabits() {
+    const container = $("dashboardHabits");
+    container.innerHTML = "";
+    if (habits.length === 0) {
+        container.innerHTML =
+            '<div class="empty-message">No habits yet.</div>';
+        return;
+    }
+    const today = getTodayKey();
+    habits.slice(0, 4).forEach(function(habit) {
+        const item = document.createElement("div");
+        item.className = "mini-habit";
+        item.textContent = habit.completedDates.includes(today)  ? "✓ " + habit.name: habit.name;
+        container.appendChild(item);
+    });
+}
+
+function updateHealthTrackers() {
+    $("waterValue").textContent =getWater() + " ml";
+    const sleep = getSleep();
+    $("sleepValue").textContent = sleep ? sleep + " hours" : "—";
+    const calories = getCalories();
+    $("calorieValue").textContent =calories ? calories + " kcal" : "—";
 }
 
 function renderHabitActivity() {
     const container = $("habitActivity");
     container.innerHTML = "";
-    for (let i = 6; i >= 0; i--) {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const dayNumber = String(date.getDate()).padStart(2, "0");
-        const dateKey = year + "-" + month + "-" + dayNumber;
-        const item = document.createElement("div");
-        item.className = "activity-day";
-        const name = document.createElement("span");
-        name.textContent = date.toLocaleDateString("en-IN", {
-            weekday: "short"
-        });
+    if (habits.length === 0) {
+        container.innerHTML = '<div class="empty-message">No habit activity yet.</div>';
+        return;
+    }
 
-        const number = document.createElement("strong");
-        number.textContent = date.getDate();
-        const dot = document.createElement("div");
-        dot.className = "activity-dot";
-        let completed = false;
-        habits.forEach(function(habit) {
-            if (habit.completedDates.includes(dateKey)) {
-                completed = true;
+    const today = new Date();
+    habits.forEach(function(habit) {
+        const row = document.createElement("div");
+        row.className = "activity-row";
+        const name = document.createElement("div");
+        name.className = "activity-name";
+        name.textContent = habit.name;
+        const cells = document.createElement("div");
+        cells.className = "activity-cells";
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - i);
+            const key = getDateKey(date);
+            const cell = document.createElement("div");
+            cell.className = "activity-cell";
+            if (habit.completedDates.includes(key)) {
+                cell.classList.add("active");
             }
-        });
-
-        if (completed) {
-            dot.classList.add("completed");
+            cells.appendChild(cell);
         }
-
-        item.appendChild(name);
-        item.appendChild(number);
-        item.appendChild(dot);
-        container.appendChild(item);
-    }
-}
-
-function updateStatistics() {
-    const completedTasks = tasks.filter(function(task) {
-        return task.status === "completed";
-    }).length;
-    const completedHabits = habits.filter(function(habit) {
-        return habit.completedDates.includes(getTodayKey());
-    }).length;
-    $("taskCount").textContent = tasks.length;
-    $("habitCount").textContent = habits.length;
-    $("waterCount").textContent = getWater() + " ml";
-    $("sleepCount").textContent = (getSleep() || 0) + " hrs";
-    let score = 0;
-    if (tasks.length > 0) {
-        score += (completedTasks / tasks.length) * 40;
-    }
-    if (habits.length > 0) {
-        score += (completedHabits / habits.length) * 40;
-    }
-    if (getWater() > 0) {
-        score += 10;
-    }
-    if (getSleep() > 0) {
-        score += 10;
-    }
-    $("dailyScore").textContent = Math.round(score) + "%";
-}
-
-function updateHealthTrackers() {
-    $("waterAmount").textContent = getWater() + " ml";
-    $("sleepAmount").textContent = (getSleep() || 0) + " hrs";
-    $("calorieAmount").textContent = (getCalories() || 0) + " kcal";
-}
-
-function setupDragAndDrop() {
-    const pending = $("pendingTasks");
-    const completed = $("completedTasks");
-
-    [pending, completed].forEach(function(container) {
-        container.addEventListener("dragover", function(event) {
-            event.preventDefault();
-        });
-
-        container.addEventListener("drop", function(event) {
-            event.preventDefault();
-
-            const id = Number( event.dataTransfer.getData("text/plain")
-            );
-
-            const status = container === pending  ? "pending" : "completed";
-            moveTask(id, status);
-            renderTasks();
-            updateStatistics();
-            renderWeeklySummary();
-            renderMonthlySummary();
-        });
+        row.appendChild(name);
+        row.appendChild(cells);
+        container.appendChild(row);
     });
 }
 
-function getDateKey(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return year + "-" + month + "-" + day;
+function setupDragAndDrop() {
+    const pendingContainer = $("pendingTasks");
+    const completedContainer = $("completedTasks");
+    pendingContainer.addEventListener("dragover", function(event) {
+        event.preventDefault();
+    });
+    completedContainer.addEventListener("dragover", function(event) {
+        event.preventDefault();
+    });
+    pendingContainer.addEventListener("drop", function(event) {
+        event.preventDefault();
+        const id = Number(event.dataTransfer.getData("text/plain"));
+        moveTask(id, "pending");
+        renderAll();
+        showToast("Task moved to pending.");
+    });
+    completedContainer.addEventListener("drop", function(event) {
+        event.preventDefault();
+        const id = Number(event.dataTransfer.getData("text/plain"));
+        moveTask(id, "completed");
+        renderAll();
+        showToast("Task completed!");
+    });
 }
 
 function renderWeeklySummary() {
@@ -256,164 +334,237 @@ function renderWeeklySummary() {
     const gridContainer = $("weeklyGrid");
     daysContainer.innerHTML = "";
     gridContainer.innerHTML = "";
-
+    const today = new Date();
     for (let i = 6; i >= 0; i--) {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        const day = document.createElement("span");
-        day.textContent = date.toLocaleDateString("en-IN", {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+        const day = document.createElement("div");
+        day.textContent = date.toLocaleDateString("en-US", {
             weekday: "short"
         });
         daysContainer.appendChild(day);
-    }
-
-    for (let row = 0; row < 3; row++) {
-        for (let i = 6; i >= 0; i--) {
-            const date = new Date();
-            date.setDate(date.getDate() - i);
-            const dateKey = getDateKey(date);
-            const cell = document.createElement("div");
-            cell.className = "weekly-cell";
-            if (row === 0) {
-                const completed = tasks.some(function(task) {
-                    return task.status === "completed";
-                });
-                if (completed) {
-                    cell.classList.add("medium");
-                }
+        let active = false;
+        habits.forEach(function(habit) {
+            if (habit.completedDates.includes(getDateKey(date))) {
+                active = true;
             }
-
-            if (row === 1) {
-                const completedHabits = habits.filter(function(habit) {
-                    return habit.completedDates.includes(dateKey);
-                }).length;
-
-                if (completedHabits > 0) {
-                    cell.classList.add("high");
-                }
-            }
-
-            if (row === 2) {
-                const savedWater = localStorage.getItem("fitness_water");
-                const waterData = savedWater ? JSON.parse(savedWater) : {};
-                const water = waterData[dateKey] || 0;
-                if (water >= 500) {
-                    cell.classList.add("high");
-                } else if (water > 0) {
-                    cell.classList.add("medium");
-                } else {
-                    cell.classList.add("low");
-                }
-            }
-            gridContainer.appendChild(cell);
+        });
+        const cell = document.createElement("div");
+        cell.className = "weekly-cell";
+        if (active) {
+            cell.classList.add("active");
         }
+        gridContainer.appendChild(cell);
     }
 }
 
 function renderMonthlySummary() {
     const container = $("monthlyGrid");
-
     container.innerHTML = "";
-
     const today = new Date();
-
     const year = today.getFullYear();
     const month = today.getMonth();
-
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    for (let dayNumber = 1; dayNumber <= daysInMonth; dayNumber++) {
-        const date = new Date(year, month,dayNumber);
-        const dateKey = getDateKey(date);
-
-        const cell = document.createElement("div");
-
-        cell.className = "monthly-cell";
-
-        const activeHabit = habits.some(function(habit) {
-            return habit.completedDates.includes(dateKey);
+    $("monthlyTitle").textContent =
+        today.toLocaleDateString("en-US", {
+            month: "long",
+            year: "numeric"
         });
-
-        const savedWater = localStorage.getItem("fitness_water");
-        const waterData = savedWater ? JSON.parse(savedWater): {};
-        const activeWater = waterData[dateKey] > 0;
-        if (activeHabit || activeWater) {
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    for (let i = 0; i < firstDay.getDay(); i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.className = "monthly-cell empty";
+        container.appendChild(emptyCell);
+    }
+    for (let day = 1; day <= lastDay.getDate(); day++) {
+        const date = new Date(year, month, day);
+        const key = getDateKey(date);
+        const cell = document.createElement("div");
+        cell.className = "monthly-cell";
+        cell.textContent = day;
+        let active = false;
+        habits.forEach(function(habit) {
+            if (habit.completedDates.includes(key)) {
+                active = true;
+            }
+        });
+        if (active) {
             cell.classList.add("active");
         }
         container.appendChild(cell);
     }
 }
 
-$("taskForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const input = $("taskInput");
-    const title = input.value.trim();
-    if (title === "") {
+function renderSavedQuotes() {
+    const container = $("savedQuotesList");
+    container.innerHTML = "";
+    if (savedQuotes.length === 0) {
+        container.innerHTML =
+            '<div class="empty-message">No saved quotes yet.</div>';
         return;
     }
-    addTask(title);
-    input.value = "";
-    renderTasks();
-    updateStatistics();
-    renderWeeklySummary();
-    renderMonthlySummary();
-    showToast("Task added.");
-});
+    savedQuotes.forEach(function(quote) {
+        const box = document.createElement("div");
+        box.className = "saved-quote";
+        const text = document.createElement("p");
+        text.textContent = quote.text;
+        const author = document.createElement("span");
+        author.textContent = "— " + quote.author;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "Delete";
+        button.addEventListener("click", function() {
+            deleteQuote(quote.id);
+            renderSavedQuotes();
+            showToast("Quote deleted.");
+        });
 
-$("habitForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const input = $("habitInput");
-    const category = $("habitCategory");
-    const name = input.value.trim();
-    if (name === "") return;
-    addHabit(name, category.value);
-    input.value = "";
+        box.appendChild(text);
+        box.appendChild(author);
+        box.appendChild(button);
+        container.appendChild(box);
+    });
+}
+
+function renderAll() {
+    renderTasks();
     renderHabits();
     renderHabitActivity();
-    updateStatistics();
-    renderWeeklySummary();
-    renderMonthlySummary();
-    showToast("Habit added.");
-});
-
-$("waterButton").addEventListener("click", function() {
-    addWater();
     updateHealthTrackers();
     updateStatistics();
     renderWeeklySummary();
     renderMonthlySummary();
-    showToast("250 ml added.");
-});
+    loadPomodoroTasks();
+}
 
-$("sleepForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const value = $("sleepInput").value;
-    if (value === "") return;
-    saveSleep(value);
-    $("sleepInput").value = "";
-    updateHealthTrackers();
-    updateStatistics();
-    showToast("Sleep saved.");
-});
+function setupNavigation() {
+    const buttons = document.querySelectorAll(".nav-button");
+    buttons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            const sectionId =
+                button.getAttribute("data-section");
+            document
+                .querySelectorAll(".content-section")
+                .forEach(function(section) {
+                    section.classList.remove("active-section");
+                });
+            $(sectionId).classList.add("active-section");
+            buttons.forEach(function(item) {
+                item.classList.remove("active");
+            });
+            button.classList.add("active");
+        });
+    });
+}
 
-$("calorieForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const value = $("calorieInput").value;
-    if (value === "") return;
-    saveCalories(value);
-    $("calorieInput").value = "";
-    updateHealthTrackers();
-    showToast("Calories saved.");
-});
+function setupEventListeners() {
+    $("taskForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const input = $("taskInput");
+        const title = input.value.trim();
+        if (!title) {
+            showToast("Please enter a task.");
+            return;
+        }
+        addTask(title);
+        input.value = "";
+        renderAll();
+        input.focus();
+        showToast("Task added.");
+    });
+    $("habitForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const input = $("habitInput");
+        const name = input.value.trim();
+        if (!name) {
+            showToast("Please enter a habit.");
+            return;
+        }
+        addHabit(name);
+        input.value = "";
+        renderAll();
+        input.focus();
+        showToast("Habit added.");
+    });
+    $("waterButton").addEventListener("click", function() {
+        addWater();
+        updateHealthTrackers();
+        updateStatistics();
+        renderWeeklySummary();
+        renderMonthlySummary();
+        showToast("250 ml added.");
+    });
 
-displayCurrentDate();
-loadTasks();
-loadHabits();
-renderTasks();
-renderHabits();
-renderHabitActivity();
-updateHealthTrackers();
-updateStatistics();
-setupDragAndDrop();
-renderWeeklySummary();
-renderMonthlySummary();
+    $("sleepButton").addEventListener("click", function() {
+        const input = $("sleepInput");
+        const value = input.value;
+        if (!value) {
+            showToast("Enter your sleep hours.");
+            return;
+        }
+        saveSleep(Number(value));
+        updateHealthTrackers();
+        updateStatistics();
+        input.value = "";
+        showToast("Sleep saved.");
+    });
+
+    $("calorieButton").addEventListener("click", function() {
+        const input = $("calorieInput");
+        const value = input.value;
+        if (!value) {
+            showToast("Enter your calories.");
+            return;
+        }
+        saveCalories(Number(value));
+        updateHealthTrackers();
+        input.value = "";
+        showToast("Calories saved.");
+    });
+
+    $("newQuoteButton").addEventListener("click", function() {
+        getQuote();
+    });
+
+    $("saveQuoteButton").addEventListener("click", function() {
+        const text = $("quoteText").textContent;
+        const author = $("quoteAuthor").textContent.replace("— ", "");
+        if (!text || text === "Click the button to get a quote.") {
+            showToast("Get a quote first.");
+            return;
+        }
+        addQuote(text, author);
+        renderSavedQuotes();
+        showToast("Quote saved.");
+    });
+
+    $("pomodoroTaskSelect").addEventListener("change", function() {
+        if (timerInterval !== null) {
+            resetTimer();
+        }
+    });
+
+    $("startTimerButton").addEventListener("click", function() {
+        startTimer();
+    });
+
+    $("pauseTimerButton").addEventListener("click", function() {
+        pauseTimer();
+    });
+
+    $("resetTimerButton").addEventListener("click", function() {
+        resetTimer();
+    });
+}
+document.addEventListener("DOMContentLoaded", function() {
+    displayCurrentDate();
+    loadTasks();
+    loadHabits();
+    loadQuotes();
+    setupNavigation();
+    setupEventListeners();
+    setupDragAndDrop();
+    updateTimerDisplay();
+    renderAll();
+    renderSavedQuotes();
+});
