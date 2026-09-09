@@ -14,9 +14,11 @@
         </div>
         <nav class="sidebar-nav">
             <a href="#dashboard" class="nav-item active">Dashboard</a>
+            <a href="#quotes" class="nav-item">Quotes</a>
             <a href="#tasks" class="nav-item">Tasks</a>
             <a href="#habits" class="nav-item">Habits</a>
             <a href="#health" class="nav-item">Health</a>
+            <a href="#pomodoro" class="nav-item">Pomodoro</a>
         </nav>
 
         <div class="sidebar-divider"></div>
@@ -75,6 +77,27 @@
                         <strong id="sleepCount">0 hrs</strong>
                     </div>
                 </div>
+            </section>
+             <section id="quotes" class="content-section">
+              <div class="section-heading">
+                  <div>
+                   <small>MOTIVATION</small>
+                   <h3>Daily Quote</h3>
+                   <p>Get a motivational quote to keep moving forward.</p>
+                  </div>
+             </div>
+             <div class="quote-box">
+                <p id="quoteText">Click the button to get a quote.</p>
+                <span id="quoteAuthor"></span>
+                    <div class="quote-actions">
+                       <button id="newQuoteButton" type="button">New Quote</button>
+                       <button id="saveQuoteButton" type="button">Save Quote</button>
+                    </div>
+             </div>
+             <div class="saved-quotes">
+                 <h4>Saved Quotes</h4>
+                <div id="savedQuotesList"></div>
+            </div>
             </section>
 
             <section id="tasks" class="content-section">
@@ -176,6 +199,27 @@
                     </div>
                 </div>
             </section>
+            <section id="pomodoro" class="content-section">
+                 <div class="section-heading">
+                    <div>
+                        <small>FOCUS</small>
+                        <h3>Pomodoro Timer</h3>
+                        <p>Focus on one task at a time.</p>
+                    </div>
+                   </div>
+                <div class="pomodoro-box">
+                    <select id="pomodoroTaskSelect">
+                         <option value="">Select a task</option>
+                    </select>
+                    <div id="timerDisplay">25:00</div>
+                         <p id="timerStatus">Ready to focus</p>
+                             <div class="pomodoro-actions">
+                                <button id="startTimerButton" type="button">Start</button>
+                                 <button id="pauseTimerButton" type="button">Pause</button>
+                                    <button id="resetTimerButton" type="button">Reset</button>
+                            </div>
+                        </div>
+            </section>
 
             <section id="weekly" class="content-section">
                 <div class="section-heading">
@@ -208,16 +252,27 @@
                         <p>Your activity throughout the month.</p>
                     </div>
                 </div>
-                <div id="monthlyGrid" class="monthly-grid"></div>
+                <div class="monthly-weekdays">
+                  <span>Sun</span>
+                   <span>Mon</span>
+                   <span>Tue</span>
+                   <span>Wed</span>
+                   <span>Thu</span>
+                   <span>Fri</span>
+                  <span>Sat</span>
+                </div>
+            <div id="monthlyGrid" class="monthly-grid"></div>
             </section>
         </main>
 
         <div id="toast" class="toast"></div>
     </div>
-
+     
+    <script src="quotes.js"></script>
     <script src="tasks.js"></script>
     <script src="habits.js"></script>
     <script src="trackers.js"></script>
+    <script src="pomodoro.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
