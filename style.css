@@ -820,3 +820,279 @@ button {
         margin-left: 0;
     }
 }
+.main-content {
+    padding: 32px 42px 70px;
+}
+
+.topbar {
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.welcome-section {
+    min-height: 235px;
+    padding: 36px 40px;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(30, 41, 59, 0.06);
+}
+
+.welcome-section h2 {
+    font-size: 32px;
+    letter-spacing: -0.5px;
+}
+
+.welcome-section p {
+    max-width: 600px;
+    font-size: 14px;
+}
+
+.score-box {
+    min-width: 145px;
+    padding: 22px;
+    border-radius: 9px;
+    box-shadow: 0 4px 14px rgba(30, 41, 59, 0.07);
+}
+
+.score-box strong {
+    font-size: 32px;
+}
+
+.stats-grid {
+    gap: 18px;
+    margin-bottom: 26px;
+}
+
+.stat-card {
+    position: relative;
+    padding: 22px;
+    border-radius: 9px;
+    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(30, 41, 59, 0.08);
+}
+
+.stat-card small {
+    font-size: 10px;
+}
+
+.stat-card strong {
+    font-size: 25px;
+}
+
+.dashboard-grid {
+    gap: 22px;
+}
+
+.dashboard-card {
+    padding: 25px;
+    border-radius: 9px;
+    box-shadow: 0 3px 14px rgba(30, 41, 59, 0.04);
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    font-size: 28px;
+    letter-spacing: -0.3px;
+}
+
+.section-heading h3 {
+    font-size: 20px;
+}
+
+.mini-task,
+.mini-habit {
+    padding: 14px;
+    border-radius: 7px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.mini-task:hover,
+.mini-habit:hover {
+    background: rgb(242, 246, 251);
+    border-color: rgb(207, 216, 228);
+}
+
+.input-form {
+    gap: 12px;
+}
+
+.input-form input {
+    padding: 13px 14px;
+    border-radius: 7px;
+}
+
+.input-form button,
+.quote-actions button,
+.health-card button,
+.pomodoro-actions button {
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.input-form button:hover,
+.quote-actions button:hover,
+.health-card button:hover,
+.pomodoro-actions button:hover {
+    transform: translateY(-1px);
+}
+
+.task-column,
+.habit-column {
+    padding: 22px;
+    border-radius: 9px;
+    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
+}
+
+.column-heading {
+    margin-bottom: 17px;
+}
+
+.column-heading h3 {
+    font-size: 17px;
+}
+
+.task-item,
+.habit-item {
+    padding: 14px;
+    margin-bottom: 9px;
+    border-radius: 7px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.task-item:hover,
+.habit-item:hover {
+    transform: translateX(2px);
+    box-shadow: 0 3px 9px rgba(30, 41, 59, 0.06);
+}
+
+.task-check,
+.habit-check {
+    width: 25px;
+    height: 25px;
+}
+
+.task-title,
+.habit-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.health-grid {
+    gap: 18px;
+}
+
+.health-card {
+    padding: 25px;
+    border-radius: 9px;
+    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.health-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(30, 41, 59, 0.08);
+}
+
+.health-card strong {
+    font-size: 29px;
+}
+
+.health-input input {
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.quote-box {
+    padding: 45px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.05);
+}
+
+.quote-box p {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.saved-quotes {
+    padding: 25px;
+    border-radius: 9px;
+}
+
+.saved-quote {
+    padding: 15px;
+    border-radius: 7px;
+}
+
+.pomodoro-box {
+    padding: 42px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.05);
+}
+
+.pomodoro-box select {
+    padding: 13px;
+    border-radius: 7px;
+}
+
+#timerDisplay {
+    font-size: 68px;
+    letter-spacing: 3px;
+}
+
+.summary-box {
+    padding: 28px;
+    border-radius: 9px;
+    box-shadow: 0 3px 14px rgba(30, 41, 59, 0.04);
+}
+
+.summary-title {
+    font-size: 15px;
+}
+
+.weekly-cell {
+    height: 46px;
+    border-radius: 6px;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.weekly-cell:hover {
+    transform: scale(1.03);
+}
+
+.monthly-cell {
+    height: 46px;
+    border-radius: 6px;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.monthly-cell:hover {
+    transform: scale(1.03);
+}
+
+.nav-button {
+    transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.nav-button:hover {
+    padding-left: 16px;
+}
+
+.toast {
+    padding: 13px 19px;
+    border-radius: 7px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+}

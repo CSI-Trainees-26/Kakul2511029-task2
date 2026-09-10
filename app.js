@@ -39,7 +39,7 @@ function renderTasks() {
         checkButton.textContent = task.status === "completed" ? "✓" : "";
         checkButton.addEventListener("click", function() {
             const wasCompleted = task.status === "completed";
-            toggleTaskStatus(task.id);
+            toggleTaskStatus(task.id); 
             renderAll();
             showToast(wasCompleted ? "Task moved to pending."  : "Task completed!");
         });
@@ -182,8 +182,7 @@ function updateStatistics() {
         $("statTasksText").textContent = "All tasks completed";
     }
      else {
-        $("statTasksText").textContent =
-            totalTasks - completedTasks + " remaining";
+        $("statTasksText").textContent = totalTasks - completedTasks + " remaining";
     }
     const totalHabits = habits.length;
     const completedHabits = habits.filter(function(habit) {
@@ -223,8 +222,7 @@ function updateStatistics() {
         score = habitScore * 100;
     }
 
-    $("dailyScore").textContent =
-        Math.round(score) + "%";
+    $("dailyScore").textContent = Math.round(score) + "%";
 }
 
 function renderDashboardTasks() {
@@ -249,8 +247,7 @@ function renderDashboardHabits() {
     const container = $("dashboardHabits");
     container.innerHTML = "";
     if (habits.length === 0) {
-        container.innerHTML =
-            '<div class="empty-message">No habits yet.</div>';
+        container.innerHTML = '<div class="empty-message">No habits yet.</div>';
         return;
     }
     const today = getTodayKey();
@@ -399,8 +396,7 @@ function renderSavedQuotes() {
     const container = $("savedQuotesList");
     container.innerHTML = "";
     if (savedQuotes.length === 0) {
-        container.innerHTML =
-            '<div class="empty-message">No saved quotes yet.</div>';
+        container.innerHTML = '<div class="empty-message">No saved quotes yet.</div>';
         return;
     }
     savedQuotes.forEach(function(quote) {
@@ -441,8 +437,7 @@ function setupNavigation() {
     const buttons = document.querySelectorAll(".nav-button");
     buttons.forEach(function(button) {
         button.addEventListener("click", function() {
-            const sectionId =
-                button.getAttribute("data-section");
+            const sectionId =  button.getAttribute("data-section");
             document
                 .querySelectorAll(".content-section")
                 .forEach(function(section) {

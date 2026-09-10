@@ -65,7 +65,7 @@ function resetTimer() {
 }
 
 function completePomodoroTask(taskId) {
-    const task = tasks.find(function(task) {
+    const task = task.find(function(task) {
         return task.id === taskId;
     });
     if (!task) return;
