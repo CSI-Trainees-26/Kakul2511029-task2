@@ -42,8 +42,8 @@ button {
 }
 
 .logo p {
-    font-size: 11px;
     color: rgb(166, 176, 190);
+    font-size: 11px;
 }
 
 .sidebar nav {
@@ -56,14 +56,16 @@ button {
     margin-bottom: 6px;
     padding: 11px 12px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 6px;
     background: transparent;
     color: rgb(184, 193, 205);
     text-align: left;
     font-size: 13px;
+    transition: background 0.2s, color 0.2s, padding-left 0.2s;
 }
 
 .nav-button:hover {
+    padding-left: 16px;
     background: rgb(39, 51, 69);
     color: rgb(255, 255, 255);
 }
@@ -76,14 +78,14 @@ button {
 .main-content {
     margin-left: 235px;
     min-height: 100vh;
-    padding: 28px 38px 60px;
+    padding: 32px 42px 70px;
 }
 
 .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
 
 .topbar small {
@@ -95,7 +97,8 @@ button {
 
 .topbar h1 {
     margin-top: 5px;
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .topbar-title {
@@ -113,22 +116,21 @@ button {
 }
 
 .welcome-section {
-    position: relative;
-    min-height: 220px;
+    min-height: 235px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 32px 36px;
-    margin-bottom: 22px;
-    overflow: hidden;
+    gap: 30px;
+    padding: 30px 40px;
+    margin-bottom: 26px;
     background: rgb(255, 255, 255);
     border: 1px solid rgb(226, 230, 236);
-    border-radius: 7px;
-    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(30, 41, 59, 0.06);
 }
 
 .welcome-section > div:first-child {
-    max-width: 65%;
+    flex: 1;
+    max-width: none;
 }
 
 .welcome-section small {
@@ -139,32 +141,57 @@ button {
 }
 
 .welcome-section h2 {
-    margin: 7px 0 10px;
-    font-size: 30px;
+    margin: 8px 0 10px;
+    font-size: 32px;
     line-height: 1.2;
 }
 
 .welcome-section p {
+    max-width: 480px;
     color: rgb(106, 119, 136);
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.welcome-image {
+    width: 190px;
+    height: 155px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
 }
 
 .score-box {
     position: relative;
     z-index: 2;
-    min-width: 125px;
-    padding: 18px;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgb(218, 225, 234);
-    border-radius: 6px;
+    width: 145px;
+    min-width: 145px;
+    padding: 22px;
+    background: rgb(248, 250, 253);
+    border: 1px solid rgb(220, 227, 236);
+    border-radius: 9px;
+    box-shadow: 0 4px 14px rgba(30, 41, 59, 0.07);
+    text-align: center;
+}
+
+.score-box {
+    position: relative;
+    z-index: 2;
+    min-width: 145px;
+    padding: 22px;
+    background: rgb(248, 250, 253);
+    border: 1px solid rgb(220, 227, 236);
+    border-radius: 9px;
+    box-shadow: 0 4px 14px rgba(30, 41, 59, 0.07);
     text-align: center;
 }
 
 .score-box strong {
     display: block;
     color: rgb(32, 65, 134);
-    font-size: 28px;
+    font-size: 32px;
+    font-weight: 700;
 }
 
 .score-box span {
@@ -172,36 +199,69 @@ button {
     margin-top: 5px;
     color: rgb(106, 119, 136);
     font-size: 9px;
-    letter-spacing: 0.7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.score-progress {
+    width: 100%;
+    height: 7px;
+    margin-top: 14px;
+    overflow: hidden;
+    background: rgb(229, 234, 241);
+    border-radius: 5px;
+}
+
+#scoreProgress {
+    width: 0%;
+    height: 100%;
+    background: rgb(32, 65, 134);
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+#scoreMessage {
+    margin-top: 8px;
+    color: rgb(106, 119, 136);
+    font-size: 10px;
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 22px;
+    gap: 18px;
+    margin-bottom: 26px;
 }
 
 .stat-card {
-    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    padding: 22px;
     background: rgb(255, 255, 255);
     border: 1px solid rgb(226, 230, 236);
-    border-radius: 6px;
+    border-radius: 9px;
+    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(30, 41, 59, 0.08);
 }
 
 .stat-card small {
     display: block;
     margin-bottom: 9px;
     color: rgb(111, 123, 140);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .stat-card strong {
     display: block;
-    font-size: 23px;
     color: rgb(32, 65, 134);
+    font-size: 25px;
 }
 
 .stat-card span {
@@ -214,7 +274,7 @@ button {
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 22px;
 }
 
 .dashboard-card,
@@ -227,18 +287,19 @@ button {
 .summary-box {
     background: rgb(255, 255, 255);
     border: 1px solid rgb(226, 230, 236);
-    border-radius: 6px;
+    border-radius: 9px;
 }
 
 .dashboard-card {
-    padding: 22px;
+    padding: 25px;
+    box-shadow: 0 3px 14px rgba(30, 41, 59, 0.04);
 }
 
 .section-heading {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 22px;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .section-heading small {
@@ -250,12 +311,13 @@ button {
 
 .section-heading h2 {
     margin-top: 6px;
-    font-size: 27px;
+    font-size: 28px;
+    letter-spacing: -0.3px;
 }
 
 .section-heading h3 {
     margin-top: 6px;
-    font-size: 19px;
+    font-size: 20px;
 }
 
 .section-heading p {
@@ -282,25 +344,33 @@ button {
 
 .mini-task,
 .mini-habit {
-    padding: 12px;
+    padding: 14px;
     background: rgb(247, 249, 252);
     border: 1px solid rgb(232, 235, 240);
-    border-radius: 5px;
+    border-radius: 7px;
     font-size: 13px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.mini-task:hover,
+.mini-habit:hover {
+    background: rgb(242, 246, 251);
+    border-color: rgb(207, 216, 228);
 }
 
 .input-form {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 22px;
 }
 
 .input-form input {
     flex: 1;
-    padding: 12px 13px;
+    padding: 13px 14px;
     border: 1px solid rgb(210, 216, 225);
-    border-radius: 5px;
+    border-radius: 7px;
     outline: none;
+    background: rgb(255, 255, 255);
 }
 
 .input-form input:focus {
@@ -312,12 +382,14 @@ button {
 .quote-actions button,
 .health-card button,
 .pomodoro-actions button {
-    padding: 11px 17px;
+    padding: 12px 18px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 7px;
     background: rgb(32, 65, 134);
     color: rgb(255, 255, 255);
     font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
 }
 
 .input-form button:hover,
@@ -325,6 +397,7 @@ button {
 .health-card button:hover,
 .pomodoro-actions button:hover {
     background: rgb(25, 51, 108);
+    transform: translateY(-1px);
 }
 
 .task-columns,
@@ -336,18 +409,19 @@ button {
 
 .task-column,
 .habit-column {
-    padding: 20px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
 }
 
 .column-heading {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    justify-content: space-between;
+    margin-bottom: 17px;
 }
 
 .column-heading h3 {
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .column-heading span {
@@ -358,6 +432,7 @@ button {
     color: rgb(32, 65, 134);
     text-align: center;
     font-size: 11px;
+    font-weight: 700;
 }
 
 .task-list,
@@ -366,23 +441,30 @@ button {
 }
 
 .task-item {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 11px;
-    padding: 12px;
-    margin-bottom: 8px;
-    background: rgb(248, 250, 252);
+    padding: 14px;
+    margin-bottom: 9px;
+    background: rgb(250, 251, 253);
     border: 1px solid rgb(232, 235, 240);
-    border-radius: 5px;
+    border-radius: 7px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.task-item:hover {
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.06);
 }
 
 .task-check,
 .habit-check {
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
     border: 1px solid rgb(188, 197, 208);
-    border-radius: 4px;
+    border-radius: 5px;
     background: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
 }
@@ -391,7 +473,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(255, 255, 255);
 }
 
 .completed-task .task-check,
@@ -400,9 +481,11 @@ button {
     background: rgb(32, 65, 134);
 }
 
-.task-title {
+.task-title,
+.habit-name {
     flex: 1;
     font-size: 13px;
+    font-weight: 500;
 }
 
 .completed-task .task-title {
@@ -425,6 +508,7 @@ button {
     background: rgb(255, 255, 255);
     color: rgb(71, 82, 98);
     font-size: 10px;
+    transition: background 0.15s;
 }
 
 .task-actions button:hover,
@@ -446,11 +530,17 @@ button {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px;
-    margin-bottom: 8px;
-    background: rgb(248, 250, 252);
+    padding: 14px;
+    margin-bottom: 9px;
+    background: rgb(250, 251, 253);
     border: 1px solid rgb(232, 235, 240);
-    border-radius: 5px;
+    border-radius: 7px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.habit-item:hover {
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.06);
 }
 
 .habit-info {
@@ -480,8 +570,8 @@ button {
 }
 
 .activity-name {
-    font-size: 12px;
     color: rgb(71, 82, 98);
+    font-size: 12px;
 }
 
 .activity-cells {
@@ -491,9 +581,14 @@ button {
 }
 
 .activity-cell {
-    height: 22px;
-    border-radius: 3px;
+    height: 25px;
+    border-radius: 5px;
     background: rgb(231, 235, 241);
+    transition: transform 0.15s, background 0.15s;
+}
+
+.activity-cell:hover {
+    transform: scale(1.12);
 }
 
 .activity-cell.active {
@@ -503,11 +598,20 @@ button {
 .health-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 18px;
 }
 
 .health-card {
-    padding: 23px;
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.health-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(30, 41, 59, 0.08);
 }
 
 .health-card small {
@@ -522,7 +626,7 @@ button {
     display: block;
     margin: 12px 0 8px;
     color: rgb(32, 65, 134);
-    font-size: 27px;
+    font-size: 29px;
 }
 
 .health-card p {
@@ -539,14 +643,19 @@ button {
 .health-input input {
     width: 100%;
     min-width: 0;
-    padding: 9px;
+    padding: 10px;
     border: 1px solid rgb(210, 216, 225);
-    border-radius: 4px;
+    border-radius: 6px;
     outline: none;
 }
 
+.health-input input:focus {
+    border-color: rgb(32, 65, 134);
+}
+
 .quote-box {
-    padding: 35px;
+    padding: 45px 40px;
+    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.05);
     text-align: center;
 }
 
@@ -554,7 +663,8 @@ button {
     max-width: 700px;
     margin: auto;
     color: rgb(45, 57, 73);
-    font-size: 21px;
+    font-size: 22px;
+    font-weight: 500;
     line-height: 1.6;
 }
 
@@ -574,18 +684,18 @@ button {
 
 .saved-quotes {
     margin-top: 22px;
-    padding: 22px;
+    padding: 25px;
 }
 
 .saved-quote {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 13px;
+    padding: 15px;
     margin-bottom: 8px;
     background: rgb(248, 250, 252);
     border: 1px solid rgb(232, 235, 240);
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
 .saved-quote p {
@@ -610,24 +720,25 @@ button {
 .pomodoro-box {
     max-width: 520px;
     margin: 0 auto;
-    padding: 35px;
+    padding: 42px;
+    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.05);
     text-align: center;
 }
 
 .pomodoro-box select {
     width: 100%;
-    padding: 11px;
+    padding: 13px;
     margin-bottom: 28px;
     border: 1px solid rgb(210, 216, 225);
-    border-radius: 5px;
+    border-radius: 7px;
     background: rgb(255, 255, 255);
 }
 
 #timerDisplay {
     color: rgb(32, 65, 134);
-    font-size: 60px;
+    font-size: 68px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 #timerStatus {
@@ -643,14 +754,21 @@ button {
 }
 
 .summary-box {
-    padding: 25px;
+    padding: 28px;
+    box-shadow: 0 3px 14px rgba(30, 41, 59, 0.04);
 }
 
 .summary-title {
     margin-bottom: 20px;
     color: rgb(71, 82, 98);
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
+}
+
+.summary-label {
+    margin-bottom: 8px;
+    color: rgb(106, 119, 136);
+    font-size: 11px;
 }
 
 .weekly-days {
@@ -662,15 +780,9 @@ button {
 }
 
 .weekly-days div {
+    color: rgb(106, 119, 136);
+    font-size: 11px;
     text-align: center;
-    color: rgb(106, 119, 136);
-    font-size: 11px;
-}
-
-.summary-label {
-    margin-bottom: 8px;
-    color: rgb(106, 119, 136);
-    font-size: 11px;
 }
 
 .weekly-grid {
@@ -681,9 +793,14 @@ button {
 }
 
 .weekly-cell {
-    height: 42px;
-    border-radius: 4px;
+    height: 46px;
+    border-radius: 6px;
     background: rgb(232, 236, 242);
+    transition: transform 0.15s, background 0.15s;
+}
+
+.weekly-cell:hover {
+    transform: scale(1.03);
 }
 
 .weekly-cell.active {
@@ -698,9 +815,9 @@ button {
 }
 
 .month-weekdays span {
-    text-align: center;
     color: rgb(106, 119, 136);
     font-size: 10px;
+    text-align: center;
 }
 
 .monthly-grid {
@@ -710,14 +827,19 @@ button {
 }
 
 .monthly-cell {
-    height: 40px;
+    height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 6px;
     background: rgb(235, 239, 244);
     color: rgb(71, 82, 98);
     font-size: 11px;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.monthly-cell:hover {
+    transform: scale(1.03);
 }
 
 .monthly-cell.active {
@@ -740,10 +862,11 @@ button {
     position: fixed;
     right: 25px;
     bottom: 25px;
-    padding: 12px 18px;
-    border-radius: 5px;
+    padding: 13px 19px;
+    border-radius: 7px;
     background: rgb(25, 35, 50);
     color: rgb(255, 255, 255);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
     font-size: 12px;
     opacity: 0;
     pointer-events: none;
@@ -819,280 +942,8 @@ button {
     .weekly-grid {
         margin-left: 0;
     }
-}
-.main-content {
-    padding: 32px 42px 70px;
-}
 
-.topbar {
-    margin-bottom: 30px;
-}
-
-.topbar h1 {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.welcome-section {
-    min-height: 235px;
-    padding: 36px 40px;
-    margin-bottom: 24px;
-    border-radius: 10px;
-    box-shadow: 0 4px 18px rgba(30, 41, 59, 0.06);
-}
-
-.welcome-section h2 {
-    font-size: 32px;
-    letter-spacing: -0.5px;
-}
-
-.welcome-section p {
-    max-width: 600px;
-    font-size: 14px;
-}
-
-.score-box {
-    min-width: 145px;
-    padding: 22px;
-    border-radius: 9px;
-    box-shadow: 0 4px 14px rgba(30, 41, 59, 0.07);
-}
-
-.score-box strong {
-    font-size: 32px;
-}
-
-.stats-grid {
-    gap: 18px;
-    margin-bottom: 26px;
-}
-
-.stat-card {
-    position: relative;
-    padding: 22px;
-    border-radius: 9px;
-    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 18px rgba(30, 41, 59, 0.08);
-}
-
-.stat-card small {
-    font-size: 10px;
-}
-
-.stat-card strong {
-    font-size: 25px;
-}
-
-.dashboard-grid {
-    gap: 22px;
-}
-
-.dashboard-card {
-    padding: 25px;
-    border-radius: 9px;
-    box-shadow: 0 3px 14px rgba(30, 41, 59, 0.04);
-}
-
-.section-heading {
-    margin-bottom: 20px;
-}
-
-.section-heading h2 {
-    font-size: 28px;
-    letter-spacing: -0.3px;
-}
-
-.section-heading h3 {
-    font-size: 20px;
-}
-
-.mini-task,
-.mini-habit {
-    padding: 14px;
-    border-radius: 7px;
-    transition: background 0.2s, border-color 0.2s;
-}
-
-.mini-task:hover,
-.mini-habit:hover {
-    background: rgb(242, 246, 251);
-    border-color: rgb(207, 216, 228);
-}
-
-.input-form {
-    gap: 12px;
-}
-
-.input-form input {
-    padding: 13px 14px;
-    border-radius: 7px;
-}
-
-.input-form button,
-.quote-actions button,
-.health-card button,
-.pomodoro-actions button {
-    padding: 12px 18px;
-    border-radius: 7px;
-    font-weight: 600;
-    transition: background 0.2s, transform 0.15s;
-}
-
-.input-form button:hover,
-.quote-actions button:hover,
-.health-card button:hover,
-.pomodoro-actions button:hover {
-    transform: translateY(-1px);
-}
-
-.task-column,
-.habit-column {
-    padding: 22px;
-    border-radius: 9px;
-    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
-}
-
-.column-heading {
-    margin-bottom: 17px;
-}
-
-.column-heading h3 {
-    font-size: 17px;
-}
-
-.task-item,
-.habit-item {
-    padding: 14px;
-    margin-bottom: 9px;
-    border-radius: 7px;
-    transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.task-item:hover,
-.habit-item:hover {
-    transform: translateX(2px);
-    box-shadow: 0 3px 9px rgba(30, 41, 59, 0.06);
-}
-
-.task-check,
-.habit-check {
-    width: 25px;
-    height: 25px;
-}
-
-.task-title,
-.habit-name {
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.health-grid {
-    gap: 18px;
-}
-
-.health-card {
-    padding: 25px;
-    border-radius: 9px;
-    box-shadow: 0 3px 12px rgba(30, 41, 59, 0.04);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.health-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 18px rgba(30, 41, 59, 0.08);
-}
-
-.health-card strong {
-    font-size: 29px;
-}
-
-.health-input input {
-    padding: 10px;
-    border-radius: 6px;
-}
-
-.quote-box {
-    padding: 45px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.05);
-}
-
-.quote-box p {
-    font-size: 22px;
-    font-weight: 500;
-}
-
-.saved-quotes {
-    padding: 25px;
-    border-radius: 9px;
-}
-
-.saved-quote {
-    padding: 15px;
-    border-radius: 7px;
-}
-
-.pomodoro-box {
-    padding: 42px;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.05);
-}
-
-.pomodoro-box select {
-    padding: 13px;
-    border-radius: 7px;
-}
-
-#timerDisplay {
-    font-size: 68px;
-    letter-spacing: 3px;
-}
-
-.summary-box {
-    padding: 28px;
-    border-radius: 9px;
-    box-shadow: 0 3px 14px rgba(30, 41, 59, 0.04);
-}
-
-.summary-title {
-    font-size: 15px;
-}
-
-.weekly-cell {
-    height: 46px;
-    border-radius: 6px;
-    transition: transform 0.15s, background 0.15s;
-}
-
-.weekly-cell:hover {
-    transform: scale(1.03);
-}
-
-.monthly-cell {
-    height: 46px;
-    border-radius: 6px;
-    transition: transform 0.15s, background 0.15s;
-}
-
-.monthly-cell:hover {
-    transform: scale(1.03);
-}
-
-.nav-button {
-    transition: background 0.2s, color 0.2s, padding-left 0.2s;
-}
-
-.nav-button:hover {
-    padding-left: 16px;
-}
-
-.toast {
-    padding: 13px 19px;
-    border-radius: 7px;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+    #timerDisplay {
+        font-size: 50px;
+    }
 }

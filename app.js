@@ -223,6 +223,20 @@ function updateStatistics() {
     }
 
     $("dailyScore").textContent = Math.round(score) + "%";
+    $("scoreProgress").style.width = score + "%";
+
+    if (score === 0) {
+        $("scoreMessage").textContent = "Start your day!";
+    }
+    else if (score < 50) {
+        $("scoreMessage").textContent = "Keep going!";
+    } 
+    else if (score < 100) {
+        $("scoreMessage").textContent = "Great progress!";
+    }
+    else {
+    $("scoreMessage").textContent = "All done!";
+}
 }
 
 function renderDashboardTasks() {
@@ -361,8 +375,7 @@ function renderMonthlySummary() {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth();
-    $("monthlyTitle").textContent =
-        today.toLocaleDateString("en-US", {
+    $("monthlyTitle").textContent = today.toLocaleDateString("en-US", {
             month: "long",
             year: "numeric"
         });
