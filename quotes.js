@@ -8,7 +8,7 @@ function loadQuotes() {
 function saveQuotes() {
     localStorage.setItem("fitness_saved_quotes", JSON.stringify(savedQuotes));
 }
-
+                                                                                               
 function addQuote(text, author) {
     const quote = {
         id: Date.now(),
